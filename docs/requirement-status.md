@@ -1,6 +1,6 @@
 # PRD requirement coverage
 
-This release accounts for all **102 uniquely numbered requirements** in the corrected [PRD](PRD.md). Coverage is not a declaration that all requirements or GA gates are complete. **Functional** means implemented for the stated bounded domain; **Bounded** means an executable limited-domain/research contract; **Partial** names remaining engineering; **External gate** needs customer/deployment evidence. No placeholder is described as a finished capability.
+This release accounts for all **102 uniquely numbered requirements** in the corrected product requirements. Coverage is not a declaration that all requirements or GA gates are complete. **Functional** means implemented for the stated bounded domain; **Bounded** means an executable limited-domain/research contract; **Partial** names remaining engineering; **External gate** needs customer/deployment evidence. No placeholder is described as a finished capability.
 
 Runtime tests: `tests/runtime.rs`, native tests: `crates/sami-intelligence/tests/native_contract.rs`, research examples/tests: `crates/sami-research/tests/operation_contracts.rs`, database test: `tests/postgres.rs`. Actual runs are recorded in [verification](verification.md).
 

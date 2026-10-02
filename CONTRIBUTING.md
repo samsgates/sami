@@ -1,6 +1,6 @@
 # Contributing
 
-Start with the [PRD](docs/PRD.md), [implementation contract](IMPLEMENTATION_CONTRACT.md) and [developer guide](docs/developer-guide.md). Work within declared native task semantics and authority boundaries.
+Start with the PRD, [implementation contract](IMPLEMENTATION_CONTRACT.md) and [developer guide](docs/developer-guide.md). Work within declared native task semantics and authority boundaries.
 
 1. Describe the observable problem and supported scope. Link the relevant requirement ID and a reproducible example.
 2. Add regression coverage for changed behavior, including invalid input and the relevant tenant/permission/freshness boundary.
