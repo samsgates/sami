@@ -15,6 +15,16 @@ This repository contains a bounded implementation with executable native example
 - Bounded calibration, evaluation, drift, conformal prediction, causal diagnostics, safe bandits, program synthesis, DSL, sequence and semantic research operations.
 - Python, TypeScript and Rust SDKs; Compose, nonroot images, Kubernetes deployment recipes and CI quality/security gates.
 
+## Architecture and workflow
+
+The architecture diagram shows how client interfaces, approved knowledge, native decisioning, controlled actions and durable runtime state fit together.
+
+![SAMI high-level architecture](media_resources/highlevel-architect-diagram.png)
+
+The workflow diagram follows a request from access and evidence checks through a typed decision, with human approval required for supported administrative actions.
+
+![How SAMI works: from request to evidence-backed outcome](media_resources/howitsworks-diagram.png)
+
 ## Prerequisites
 
 Choose either the Docker path or the local development path.
