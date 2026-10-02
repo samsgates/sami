@@ -1,0 +1,2778 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SAMI native runtime",
+    "version": "0.2.0",
+    "description": "Bounded resource API. See api.md, operation fixtures and source for per-kind validation; generic Record fields are not an exhaustive domain schema."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8080",
+      "description": "Local development; use trusted HTTPS in production"
+    }
+  ],
+  "paths": {
+    "/v1/capabilities": {
+      "get": {
+        "operationId": "get_v1_capabilities",
+        "summary": "GET /v1/capabilities",
+        "description": "Required authority: authenticated. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/me": {
+      "get": {
+        "operationId": "get_v1_me",
+        "summary": "GET /v1/me",
+        "description": "Required authority: authenticated. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/openapi": {
+      "get": {
+        "operationId": "get_v1_openapi",
+        "summary": "GET /v1/openapi",
+        "description": "Required authority: authenticated. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/{kind}": {
+      "get": {
+        "operationId": "get_v1_admin_kind",
+        "summary": "GET /v1/admin/{kind}",
+        "description": "Required authority: admin.{kind}.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_v1_admin_kind",
+        "summary": "POST /v1/admin/{kind}",
+        "description": "Required authority: admin.{kind}.write. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/admin/{kind}/{id}": {
+      "get": {
+        "operationId": "get_v1_admin_kind_id",
+        "summary": "GET /v1/admin/{kind}/{id}",
+        "description": "Required authority: admin.{kind}.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/admin/{kind}/{id}/history": {
+      "get": {
+        "operationId": "get_v1_admin_kind_id_history",
+        "summary": "GET /v1/admin/{kind}/{id}/history",
+        "description": "Required authority: admin.{kind}.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/sources/{id}": {
+      "delete": {
+        "operationId": "delete_v1_sources_id",
+        "summary": "DELETE /v1/sources/{id}",
+        "description": "Required authority: sources.delete. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/sources/{id}/publish": {
+      "post": {
+        "operationId": "post_v1_sources_id_publish",
+        "summary": "POST /v1/sources/{id}/publish",
+        "description": "Required authority: sources.publish. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{id}/retract": {
+      "post": {
+        "operationId": "post_v1_sources_id_retract",
+        "summary": "POST /v1/sources/{id}/retract",
+        "description": "Required authority: sources.retract. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sources/{id}/permissions": {
+      "post": {
+        "operationId": "post_v1_sources_id_permissions",
+        "summary": "POST /v1/sources/{id}/permissions",
+        "description": "Required authority: sources.permissions. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/claims/candidates": {
+      "post": {
+        "operationId": "post_v1_claims_candidates",
+        "summary": "POST /v1/claims/candidates",
+        "description": "Required authority: admin.claims.write. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/packs/{id}/publish": {
+      "post": {
+        "operationId": "post_v1_packs_id_publish",
+        "summary": "POST /v1/packs/{id}/publish",
+        "description": "Required authority: packs.publish. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decisions": {
+      "post": {
+        "operationId": "post_v1_decisions",
+        "summary": "POST /v1/decisions",
+        "description": "Required authority: decision.invoke. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decide": {
+      "post": {
+        "operationId": "post_v1_decide",
+        "summary": "POST /v1/decide",
+        "description": "Required authority: decision.invoke. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/respond": {
+      "post": {
+        "operationId": "post_v1_respond",
+        "summary": "POST /v1/respond",
+        "description": "Required authority: session.write + decision.invoke. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chat/completions": {
+      "post": {
+        "operationId": "post_v1_chat_completions",
+        "summary": "POST /v1/chat/completions",
+        "description": "Required authority: session.write + decision.invoke. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/receipts/{id}": {
+      "get": {
+        "operationId": "get_v1_receipts_id",
+        "summary": "GET /v1/receipts/{id}",
+        "description": "Required authority: receipt.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/receipts/{id}/replay": {
+      "post": {
+        "operationId": "post_v1_receipts_id_replay",
+        "summary": "POST /v1/receipts/{id}/replay",
+        "description": "Required authority: receipt.read + receipt.replay. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/actions/propose": {
+      "post": {
+        "operationId": "post_v1_actions_propose",
+        "summary": "POST /v1/actions/propose",
+        "description": "Required authority: action.propose + tool scopes. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/actions/{id}/approve": {
+      "post": {
+        "operationId": "post_v1_actions_id_approve",
+        "summary": "POST /v1/actions/{id}/approve",
+        "description": "Required authority: action.approve. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/actions/{id}/execute": {
+      "post": {
+        "operationId": "post_v1_actions_id_execute",
+        "summary": "POST /v1/actions/{id}/execute",
+        "description": "Required authority: action.execute + tool scopes. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ]
+      }
+    },
+    "/v1/actions/{id}/reconcile": {
+      "post": {
+        "operationId": "post_v1_actions_id_reconcile",
+        "summary": "POST /v1/actions/{id}/reconcile",
+        "description": "Required authority: action.reconcile. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/actions/{id}": {
+      "get": {
+        "operationId": "get_v1_actions_id",
+        "summary": "GET /v1/actions/{id}",
+        "description": "Required authority: action.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/feedback": {
+      "post": {
+        "operationId": "post_v1_feedback",
+        "summary": "POST /v1/feedback",
+        "description": "Required authority: feedback.write. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/feedback/{id}/promote": {
+      "post": {
+        "operationId": "post_v1_feedback_id_promote",
+        "summary": "POST /v1/feedback/{id}/promote",
+        "description": "Required authority: learning.promote. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sessions": {
+      "post": {
+        "operationId": "post_v1_sessions",
+        "summary": "POST /v1/sessions",
+        "description": "Required authority: session.write. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}": {
+      "get": {
+        "operationId": "get_v1_sessions_id",
+        "summary": "GET /v1/sessions/{id}",
+        "description": "Required authority: session.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/knowledge/search": {
+      "post": {
+        "operationId": "post_v1_knowledge_search",
+        "summary": "POST /v1/knowledge/search",
+        "description": "Required authority: knowledge.search. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/memory/query": {
+      "post": {
+        "operationId": "post_v1_memory_query",
+        "summary": "POST /v1/memory/query",
+        "description": "Required authority: knowledge.search. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/memory/write": {
+      "post": {
+        "operationId": "post_v1_memory_write",
+        "summary": "POST /v1/memory/write",
+        "description": "Required authority: admin.claims.write. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/graph/query": {
+      "post": {
+        "operationId": "post_v1_graph_query",
+        "summary": "POST /v1/graph/query",
+        "description": "Required authority: knowledge.search. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/research/{operation}": {
+      "post": {
+        "operationId": "post_v1_research_operation",
+        "summary": "POST /v1/research/{operation}",
+        "description": "Required authority: research.execute. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/keys": {
+      "get": {
+        "operationId": "get_v1_keys",
+        "summary": "GET /v1/keys",
+        "description": "Required authority: keys.manage. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_v1_keys",
+        "summary": "POST /v1/keys",
+        "description": "Required authority: keys.manage. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/keys/{id}/revoke": {
+      "post": {
+        "operationId": "post_v1_keys_id_revoke",
+        "summary": "POST /v1/keys/{id}/revoke",
+        "description": "Required authority: keys.manage. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/audit": {
+      "get": {
+        "operationId": "get_v1_audit",
+        "summary": "GET /v1/audit",
+        "description": "Required authority: audit.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/events": {
+      "get": {
+        "operationId": "get_v1_events",
+        "summary": "GET /v1/events",
+        "description": "Required authority: audit.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Bounded audit SSE page, resume using the final event ID",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Last-Event-ID",
+            "in": "header",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ]
+      }
+    },
+    "/v1/export": {
+      "get": {
+        "operationId": "get_v1_export",
+        "summary": "GET /v1/export",
+        "description": "Required authority: data.export. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/bundles/export": {
+      "post": {
+        "operationId": "post_v1_bundles_export",
+        "summary": "POST /v1/bundles/export",
+        "description": "Required authority: bundle.export. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/bundles/import": {
+      "post": {
+        "operationId": "post_v1_bundles_import",
+        "summary": "POST /v1/bundles/import",
+        "description": "Required authority: bundle.import. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workflows/{id}/run": {
+      "post": {
+        "operationId": "post_v1_workflows_id_run",
+        "summary": "POST /v1/workflows/{id}/run",
+        "description": "Required authority: workflow.execute. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workflow-runs/{id}/advance": {
+      "post": {
+        "operationId": "post_v1_workflow_runs_id_advance",
+        "summary": "POST /v1/workflow-runs/{id}/advance",
+        "description": "Required authority: workflow.execute. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workflow-runs/{id}/cancel": {
+      "post": {
+        "operationId": "post_v1_workflow_runs_id_cancel",
+        "summary": "POST /v1/workflow-runs/{id}/cancel",
+        "description": "Required authority: workflow.execute. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/roleplay": {
+      "post": {
+        "operationId": "post_v1_roleplay",
+        "summary": "POST /v1/roleplay",
+        "description": "Required authority: simulation.invoke. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/policy/diff": {
+      "post": {
+        "operationId": "post_v1_policy_diff",
+        "summary": "POST /v1/policy/diff",
+        "description": "Required authority: evaluation.execute. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Record"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "get_health",
+        "summary": "GET /health",
+        "description": "Required authority: admin.{kind}.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": []
+      }
+    },
+    "/ready": {
+      "get": {
+        "operationId": "get_ready",
+        "summary": "GET /ready",
+        "description": "Required authority: admin.{kind}.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Successful JSON response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": []
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "get_metrics",
+        "summary": "GET /metrics",
+        "description": "Required authority: admin.{kind}.read. Current tenant, purpose, owner and source ACL checks also apply.",
+        "responses": {
+          "200": {
+            "description": "Prometheus text",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or unsupported request"
+          },
+          "401": {
+            "description": "Missing credential"
+          },
+          "403": {
+            "description": "Authority unavailable or denied"
+          },
+          "404": {
+            "description": "Unavailable in this scope"
+          },
+          "409": {
+            "description": "Changed revision, effect binding or state"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "503": {
+            "description": "Required authority or compute unavailable"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Record": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "DecisionRequest": {
+        "type": "object",
+        "required": [
+          "task_id",
+          "input"
+        ],
+        "properties": {
+          "task_id": {
+            "type": "string"
+          },
+          "pack_id": {
+            "type": "string",
+            "default": "industrial-service"
+          },
+          "input": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

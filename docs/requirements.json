@@ -1,0 +1,1029 @@
+{
+  "version": "0.2.0",
+  "requirements": [
+    {
+      "id": "UX-01",
+      "requirement": "distinguish observed facts, user assertions, inferred hypotheses, and policy conclusions visually and in API metadata.",
+      "status": "Partial",
+      "implementation": [
+        "console/src/App.tsx"
+      ],
+      "evidence_or_remaining": "Real case/evidence/action/authoring views and typed results; independent accessibility and full impact usability audit remain."
+    },
+    {
+      "id": "UX-02",
+      "requirement": "display sources, effective dates, missing fields, and reasons for abstention without requiring a technical trace.",
+      "status": "Partial",
+      "implementation": [
+        "console/src/App.tsx"
+      ],
+      "evidence_or_remaining": "Real case/evidence/action/authoring views and typed results; independent accessibility and full impact usability audit remain."
+    },
+    {
+      "id": "UX-03",
+      "requirement": "permit corrections and overrides only to authorized users; require a reason and never mutate the historical receipt.",
+      "status": "Partial",
+      "implementation": [
+        "console/src/App.tsx"
+      ],
+      "evidence_or_remaining": "Real case/evidence/action/authoring views and typed results; independent accessibility and full impact usability audit remain."
+    },
+    {
+      "id": "UX-04",
+      "requirement": "make draft, proposed, approved, executed, uncertain, and blocked action states visible.",
+      "status": "Functional",
+      "implementation": [
+        "src/actions.rs",
+        "console/src/App.tsx"
+      ],
+      "evidence_or_remaining": "Actual proposed/authorized/executing/succeeded/unknown/failed/blocked states are displayed."
+    },
+    {
+      "id": "UX-05",
+      "requirement": "support keyboard operation, readable contrast, screen-reader labels, and exportable case summaries. Target WCAG 2.2 AA; verify before release.",
+      "status": "Partial",
+      "implementation": [
+        "console/src/App.tsx"
+      ],
+      "evidence_or_remaining": "Real case/evidence/action/authoring views and typed results; independent accessibility and full impact usability audit remain."
+    },
+    {
+      "id": "AR-01",
+      "requirement": "every request binds tenant, principal, purpose, agent version, source snapshot, rule/workflow versions, parser/calibrator versions, and execution mode. Mixed or incompatible bundles fail closed.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "src/api.rs"
+      ],
+      "evidence_or_remaining": "Tenant/ACL/source epochs, bounded native mode, signed device bundles; full component-version manifests and distributed capacity enforcement remain."
+    },
+    {
+      "id": "AR-02",
+      "requirement": "policy applies at source publication, retrieval, state updates, response planning, memory writes, action proposal, and action commit. A text filter is an additional boundary, not the security foundation.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "src/api.rs"
+      ],
+      "evidence_or_remaining": "Tenant/ACL/source epochs, bounded native mode, signed device bundles; full component-version manifests and distributed capacity enforcement remain."
+    },
+    {
+      "id": "AR-03",
+      "requirement": "unavailable evidence or authority never silently changes the execution mode. Return a typed failure or a permitted degraded result with explicit limitations.",
+      "status": "Functional",
+      "implementation": [
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Unavailable authority, unsupported inputs and budget failures do not silently invoke a different engine."
+    },
+    {
+      "id": "AR-04",
+      "requirement": "cap retrieved documents, claims, graph hops, rule firings, candidate parses, planner nodes, memory-write bytes, tool calls, and wall-clock time. Initial defaults: 30 retrieved passages, 200 candidate claims, three graph hops, 1,000 rule firings, five parse hypotheses, 100 planner nodes, and a 250 ms decision budget. These are configurable initial limits, not measured optimal values.",
+      "status": "Partial",
+      "implementation": [
+        "src/api.rs",
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "4 MiB bodies, 5000 sources/10000 claims, three graph hops, four compute permits, 500 ms runtime decision budget and bounded research. Limits differ from draft defaults and require load tuning."
+    },
+    {
+      "id": "AR-05",
+      "requirement": "offline bundles have a signature, tenant/device scope, content manifest, minimum runtime version, authority lease, and source freshness policy. Network-disabled tests prove the supported P0 workflows operate locally. Revocation cannot propagate while fully disconnected; expiry is the enforcement boundary until synchronization.",
+      "status": "Functional",
+      "implementation": [
+        "src/api.rs",
+        "src/crypto.rs",
+        "tests/runtime.rs"
+      ],
+      "evidence_or_remaining": "Per-device AES key, pinned issuer public trust, signed tenant/device digest, exact runtime compatibility and expiring lease. Imported native decisions work with different edge master/signing keys; effects disabled."
+    },
+    {
+      "id": "MEM-01",
+      "requirement": "support observed, candidate, approved, superseded, disputed, retracted, and deleted states. Only approved applicable claims enter high-impact decision checks.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "MEM-02",
+      "requirement": "retain typed units, currencies, locale, identifier namespaces, and interval inclusivity. Normalize before comparison; reject ambiguous conversions.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "MEM-03",
+      "requirement": "deduplicate repeated observations but preserve independent source lineage. Ten copies of one bulletin are one evidence family, not ten independent confirmations.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "MEM-04",
+      "requirement": "capture connector authority, source revision and source location. Unverifiable extraction cannot be promoted merely because its text looks plausible.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "MEM-05",
+      "requirement": "maintain scope and purpose at claim, edge, index and cache levels. Namespace priority never overrides authoritative policy or temporal applicability.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "MEM-06",
+      "requirement": "source precedence is policy-defined by predicate and use case. A warranty policy manager's approved revision can supersede an older approved policy; a service message cannot. If precedence is unresolved, return `conflicting_evidence` and request review. Do not average mutually exclusive dates or infer truth from document frequency.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "MEM-07",
+      "requirement": "eligibility checks consult the current epoch fence even if asynchronous invalidation has not finished. Dispatch authorization serializes with correction transactions (ACT-03). Corrections block still-queued actions; already committed/in-flight effects require cancellation where supported or review, not a promised retroactive block.",
+      "status": "Functional",
+      "implementation": [
+        "src/actions.rs",
+        "src/storage.rs",
+        "tests/runtime.rs"
+      ],
+      "evidence_or_remaining": "Atomic tenant epoch publication, fresh credentials and approval/source bindings fence dispatch against concurrent repair/revocation."
+    },
+    {
+      "id": "MEM-08",
+      "requirement": "dependency traversal is cycle-safe and resumable. On a missing dependency or unsupported derivation, invalidate conservatively and require review. Do not represent an incomplete trace as a full proof.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Cycle-safe conservative bounded repair exists; an over-budget repair refuses publication instead of partial success. Large resumable repair is pending."
+    },
+    {
+      "id": "MEM-09",
+      "requirement": "historical receipts stay immutable. Label them superseded or invalidated through linked events. Source repair cannot undo an already completed external effect; create a review or compensating action with fresh authority.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Typed applicable claims, lineage, conservative dependency repair and historical replay; complete generalized state machine and resumable large repair service remain."
+    },
+    {
+      "id": "DATA-01",
+      "requirement": "extract into a quarantine area, retain source coordinates, classify document/version, validate identifier and table parsing, deduplicate, preview claim candidates, and publish with authorized approval. Source text is data, including any embedded instructions.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-research/src/ingestion.rs"
+      ],
+      "evidence_or_remaining": "Quarantine extraction, source locators/rights, scoped publication, tombstone/purge/freshness; upstream vendor ingestion/cursor workers and automatic retention require integration."
+    },
+    {
+      "id": "DATA-02",
+      "requirement": "use connector-scoped credentials, allowlisted destinations, incremental cursors, backoff, checksums and an error queue. Fetchers enforce size/type limits and prevent SSRF. Parser workers have no tool-execution privileges and run in resource-limited isolation.",
+      "status": "Partial",
+      "implementation": [
+        "crates/sami-research/src/ingestion.rs",
+        "src/actions.rs"
+      ],
+      "evidence_or_remaining": "Bounded inert file extraction and protected outbound action adapter exist. Full source-fetch vendor adapters, cursors/backoff/error queues and OS parser isolation are pending."
+    },
+    {
+      "id": "DATA-03",
+      "requirement": "register owner, license/usage rights, retention, permitted purpose, languages, freshness, and downstream redistribution restrictions. Disallowed corpora cannot enter phrase memory or learned procedure datasets. A broad scraped corpus is not a launch prerequisite.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-research/src/ingestion.rs"
+      ],
+      "evidence_or_remaining": "Quarantine extraction, source locators/rights, scoped publication, tombstone/purge/freshness; upstream vendor ingestion/cursor workers and automatic retention require integration."
+    },
+    {
+      "id": "DATA-07",
+      "requirement": "connectors map per-record/group source ACLs and track permission changes. Connected access requires a fresh permission cursor/check no older than five minutes by default, or a stricter source policy. Deny access when it cannot be refreshed. Received revocations trigger immediate epoch publication; measure serving exclusion within 60 seconds of receipt, separately from upstream detection lag.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "src/api.rs",
+        "tests/runtime.rs"
+      ],
+      "evidence_or_remaining": "Group/purpose filters and <=300-second upstream permission check fail closed, with atomic received revocations. Refresh/change detection is connector/operator responsibility."
+    },
+    {
+      "id": "DATA-04",
+      "requirement": "an authorized deletion immediately tombstones the object and removes it from serving eligibility through a durable epoch fence. Purge derived claims, excerpts, lexical/sequence shards, caches, episodic references, exports and queued promotions according to the tenant's configured deletion deadline.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-research/src/ingestion.rs"
+      ],
+      "evidence_or_remaining": "Quarantine extraction, source locators/rights, scoped publication, tombstone/purge/freshness; upstream vendor ingestion/cursor workers and automatic retention require integration."
+    },
+    {
+      "id": "DATA-05",
+      "requirement": "P0 default targets are serving exclusion within 60 seconds and physical active-store purge within 24 hours for the reference workload. Immutable shards require replacement/compaction; backups expire within a documented default 30-day retention. Restore applies tombstones before readiness. These are proposed engineering targets to verify, not assertions of legal compliance.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "src/backup.rs",
+        "docs/operations.md"
+      ],
+      "evidence_or_remaining": "Synchronous active-store exclusion/purge and restore-tombstone tests pass. Production deadline measurements and automatic 30-day backup expiry are external obligations."
+    },
+    {
+      "id": "DATA-06",
+      "requirement": "keep immutable minimal receipt/audit envelopes only where retention policy permits, with separately encrypted deletable sensitive payloads. Deletion removes payloads and appends an event without editing the envelope/hash chain. Exact replay becomes `not_replayable_due_to_deletion`. Opaque identifiers and commitments are also assessed for privacy; jurisdictional retention requires deployment-specific review.",
+      "status": "Functional",
+      "implementation": [
+        "src/service.rs",
+        "tests/runtime.rs"
+      ],
+      "evidence_or_remaining": "Minimal immutable signed envelopes remain; deleted replay payloads are purged and return not_replayable_due_to_deletion."
+    },
+    {
+      "id": "NLU-01",
+      "requirement": "preserve original text offsets and normalization mappings. Handle supported negation, dates, operating-hour units, serial ranges, quoted statements, corrections, and cross-turn references. Maintain alternative parses when ambiguity affects decisions.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/api.rs"
+      ],
+      "evidence_or_remaining": "Domain English parser, critical field tests and CAS session assertions; general language/reference understanding and broad real-world evaluation are not supplied."
+    },
+    {
+      "id": "NLU-02",
+      "requirement": "merge state only after validation and entity resolution. Store asserted versus confirmed values, provenance, revision, and conflict flags. Example: \"It is not the 2023 unit; the newer one has 800 hours\" must not attach 800 hours to the older asset.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/api.rs"
+      ],
+      "evidence_or_remaining": "Domain English parser, critical field tests and CAS session assertions; general language/reference understanding and broad real-world evaluation are not supplied."
+    },
+    {
+      "id": "NLU-03",
+      "requirement": "unsupported intent, language, reference, or ambiguous quantity returns a typed clarification/unsupported status. A structured form is an available fallback. Keyword overlap cannot authorize a high-impact state change.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/api.rs"
+      ],
+      "evidence_or_remaining": "Domain English parser, critical field tests and CAS session assertions; general language/reference understanding and broad real-world evaluation are not supplied."
+    },
+    {
+      "id": "STATE-01",
+      "requirement": "survive worker restart without losing confirmed data, pending approval, or workflow progress. Reconstruct from committed events and snapshots; caches are disposable.",
+      "status": "Functional",
+      "implementation": [
+        "src/api.rs",
+        "src/storage.rs",
+        "src/workflows.rs"
+      ],
+      "evidence_or_remaining": "Durable state, immutable versioned records and pinned runs; assertions/simulation cannot grant authority."
+    },
+    {
+      "id": "STATE-02",
+      "requirement": "context/session/user preferences can affect wording and convenience, but cannot override tenant policy, authoritative asset records, or mandatory evidence checks. Simulated trust/purchase-intent variables remain explicitly labeled simulation state in the later roleplay product.",
+      "status": "Functional",
+      "implementation": [
+        "src/api.rs",
+        "src/storage.rs",
+        "src/workflows.rs"
+      ],
+      "evidence_or_remaining": "Durable state, immutable versioned records and pinned runs; assertions/simulation cannot grant authority."
+    },
+    {
+      "id": "NLU-04",
+      "requirement": "evaluate entity/slot accuracy and meaning preservation by critical field. Serial numbers, policy dates and negations receive separate tests rather than disappearing into aggregate intent F1. New language packs require their own release gates.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/api.rs"
+      ],
+      "evidence_or_remaining": "Domain English parser, critical field tests and CAS session assertions; general language/reference understanding and broad real-world evaluation are not supplied."
+    },
+    {
+      "id": "DEC-01",
+      "requirement": "support boolean, choice, multi-choice, ordinal score, rank, extraction, and action selection only where label semantics and evaluation exist. Continuous quantities require units and documented interval semantics. Deterministic eligibility decisions return rule results; calibrated estimates are separate.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Registered typed decision contracts, deny/unknown/conflict handling and evidence diagnostics; supported domain fixtures are not validated customer models."
+    },
+    {
+      "id": "DEC-02",
+      "requirement": "hard constraints determine feasible options before scoring. Deny overrides allow. Equal-priority incompatible business rules return `policy_conflict`; rule priority does not convert an untrusted source into authority.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Registered typed decision contracts, deny/unknown/conflict handling and evidence diagnostics; supported domain fixtures are not validated customer models."
+    },
+    {
+      "id": "DEC-03",
+      "requirement": "use normalized interpretable features and validated classifiers/rankers. Evidence decomposition explains inputs and contributions; it is not automatically a causal explanation. Source families and shared derivations prevent duplicate evidence from inflating support.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Registered typed decision contracts, deny/unknown/conflict handling and evidence diagnostics; supported domain fixtures are not validated customer models."
+    },
+    {
+      "id": "DEC-04",
+      "requirement": "statuses include resolved, ambiguous, insufficient evidence, conflicting evidence, stale evidence, unsupported, policy denied, policy conflict, needs human, and budget exhausted. Status semantics remain stable across SDKs.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Registered typed decision contracts, deny/unknown/conflict handling and evidence diagnostics; supported domain fixtures are not validated customer models."
+    },
+    {
+      "id": "DEC-05",
+      "requirement": "missing mandatory evidence, unavailable authority, verifier timeout, or unresolved contradiction cannot produce an authorized action. Return a useful next question or escalation reason. Rank scores need not sum to one and must not be mislabeled probability distributions.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Registered typed decision contracts, deny/unknown/conflict handling and evidence diagnostics; supported domain fixtures are not validated customer models."
+    },
+    {
+      "id": "UNC-01",
+      "requirement": "do not compress these into an unexplained universal confidence float. Return class probabilities only when a compatible validated calibration artifact is available. Otherwise use null plus the reason. Deterministic rule outputs do not acquire artificial 0.99 confidence.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/calibration.rs"
+      ],
+      "evidence_or_remaining": "Separate uncertainty, calibration, held-out metrics, drift and conformal routines; production binding and real population validation remain."
+    },
+    {
+      "id": "UNC-02",
+      "requirement": "separate training, threshold selection, calibration, and locked test sets by customer/equipment family/time where possible. Record class counts, eligible cohorts, label provenance, missing outcomes and confidence intervals. Data overlap invalidates comparative results.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/calibration.rs"
+      ],
+      "evidence_or_remaining": "Separate uncertainty, calibration, held-out metrics, drift and conformal routines; production binding and real population validation remain."
+    },
+    {
+      "id": "UNC-03",
+      "requirement": "report Brier/log loss for probabilistic tasks, declared-bin ECE, cohort reliability, severe-error rate, selective risk versus coverage, and workload escalated to humans. ECE alone cannot certify safety. OOD signals include unsupported identifiers, low semantic overlap, contradictory interpretations and drift; entropy alone misses unseen inputs.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/calibration.rs"
+      ],
+      "evidence_or_remaining": "Separate uncertainty, calibration, held-out metrics, drift and conformal routines; production binding and real population validation remain."
+    },
+    {
+      "id": "UNC-04",
+      "requirement": "meaningful parser, feature, ontology, source population or decision-model changes mark affected calibrators stale. Drift can lower authority, increase review or suspend probabilistic outputs; it cannot silently reuse old estimates as certified values.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/calibration.rs"
+      ],
+      "evidence_or_remaining": "Separate uncertainty, calibration, held-out metrics, drift and conformal routines; production binding and real population validation remain."
+    },
+    {
+      "id": "UNC-05",
+      "requirement": "conformal sets/intervals may be added with explicit calibration assumptions. Standard marginal coverage under exchangeability does not guarantee correctness for an individual, each subgroup, or arbitrary distribution shift. [S16]",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/calibration.rs"
+      ],
+      "evidence_or_remaining": "Separate uncertainty, calibration, held-out metrics, drift and conformal routines; production binding and real population validation remain."
+    },
+    {
+      "id": "REAS-01",
+      "requirement": "implement typed relational queries, graph traversal, stratified rules, backward checks for required evidence, arithmetic/unit constraints, and approved procedure composition. Inference rules name their assumptions and source dependencies. Limit recursion, candidate counts and time.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "crates/sami-research/src/program.rs"
+      ],
+      "evidence_or_remaining": "Open-world checks, graphs, alternative supports and typed relational DSL; no arbitrary theorem prover or physical-world model."
+    },
+    {
+      "id": "REAS-02",
+      "requirement": "retain alternative derivations. Retracting one supporting source invalidates the conclusion only if remaining permitted support is insufficient. An explicit unknown, contradicted, or absent state is not equivalent to false; use open-world semantics unless a task declares its data complete.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "crates/sami-research/src/program.rs"
+      ],
+      "evidence_or_remaining": "Open-world checks, graphs, alternative supports and typed relational DSL; no arbitrary theorem prover or physical-world model."
+    },
+    {
+      "id": "REAS-03",
+      "requirement": "solver-backed checks use a named bounded/decidable fragment. Solver `unknown`, unsupported constraints and timeout are non-authorizing outcomes. A valid proof shows consistency with typed premises and rules, not that a manual or ERP record is true.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "crates/sami-research/src/program.rs"
+      ],
+      "evidence_or_remaining": "Explicit typed finite checks and termination budgets; no SMT solver-backed certificate. Unsupported DSL/timeout cannot authorize effects."
+    },
+    {
+      "id": "PLAN-01",
+      "requirement": "search only registered actions with preconditions, effects, cost budgets, and termination criteria. Prefer a minimal policy-compliant plan. No autonomous open-ended objective creation is permitted.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/workflows.rs"
+      ],
+      "evidence_or_remaining": "Registered minimal-cost finite planning and reviewed missing-field questions; no unconstrained goals or deployment-validated value-of-information estimator."
+    },
+    {
+      "id": "PLAN-02",
+      "requirement": "choose clarification using expected reduction in decision loss minus interaction cost, where probabilities are validated. Otherwise use a reviewed information-priority rule. Record why the question matters and stop when required evidence is present or escalation is warranted.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence",
+        "src/workflows.rs"
+      ],
+      "evidence_or_remaining": "Registered minimal-cost finite planning and reviewed missing-field questions; no unconstrained goals or deployment-validated value-of-information estimator."
+    },
+    {
+      "id": "REAS-04",
+      "requirement": "any causal module requires declared variables, intervention targets, confounding assumptions, identifiability, overlap and sensitivity analysis. Outputs distinguish identifiable effect, assumption-based simulation and not identifiable. Autonomous physical experimentation and causal claims extracted from text frequency remain excluded.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/causal.rs"
+      ],
+      "evidence_or_remaining": "Binary treatment/outcome g-computation diagnostics, declared adjustment assumptions, overlap/identifiability warnings and sensitivity bound. No general causal discovery or physical experimentation."
+    },
+    {
+      "id": "REC-01",
+      "requirement": "receipt envelopes are canonical, versioned, hash-linked and optionally signed. Protected facts/actor details live in separately encrypted, deletable payloads; the envelope uses governed opaque bindings/commitments. Record key rotation and linked deletion events. A signature establishes integrity and issuer, not factual correctness or action completion.",
+      "status": "Partial",
+      "implementation": [
+        "src/crypto.rs",
+        "src/storage.rs"
+      ],
+      "evidence_or_remaining": "Canonical signatures, hash chains and separately encrypted payloads work; managed signing-key rotation/trust history is an operator extension."
+    },
+    {
+      "id": "REC-02",
+      "requirement": "a verifier accepts exactly the stated guarantee: the typed output satisfied the declared checks relative to named inputs and assumptions. Expose check coverage and unverified obligations. A trace alone is an explanation; it becomes a certificate only for obligations actually verified.",
+      "status": "Functional",
+      "implementation": [
+        "src/service.rs",
+        "src/crypto.rs",
+        "src/storage.rs"
+      ],
+      "evidence_or_remaining": "Signed canonical envelopes, encrypted deletable payloads and pinned deterministic replay with current eligibility checks; signatures certify integrity only."
+    },
+    {
+      "id": "REC-03",
+      "requirement": "replay reconstructs structured results from pinned versions, recorded external observations and a deterministic seed. Canonical hashes and specified numeric tolerances apply. Optional LLM wording need not replay exactly; its recorded output can be inspected.",
+      "status": "Functional",
+      "implementation": [
+        "src/service.rs",
+        "src/crypto.rs",
+        "src/storage.rs"
+      ],
+      "evidence_or_remaining": "Signed canonical envelopes, encrypted deletable payloads and pinned deterministic replay with current eligibility checks; signatures certify integrity only."
+    },
+    {
+      "id": "REC-04",
+      "requirement": "current eligibility is a live lookup, distinct from historical validity. A receipt can be historically valid and currently expired, invalidated, or insufficient for a new action. Deleted source content can make exact replay unavailable; expose that explicitly.",
+      "status": "Functional",
+      "implementation": [
+        "src/service.rs",
+        "src/crypto.rs",
+        "src/storage.rs"
+      ],
+      "evidence_or_remaining": "Signed canonical envelopes, encrypted deletable payloads and pinned deterministic replay with current eligibility checks; signatures certify integrity only."
+    },
+    {
+      "id": "ACT-01",
+      "requirement": "the tool registry defines input/output schema, destination, effect class, required scopes, idempotency support, timeout, reconciliation query, and compensation limits. Tools receive least-privilege credentials from the execution service, never from text or a model.",
+      "status": "Partial",
+      "implementation": [
+        "src/actions.rs"
+      ],
+      "evidence_or_remaining": "Approval/epoch fencing, durable effect keys, atomic internal tickets and HTTP ambiguity reconciliation; real destination contracts and compensating adapters require acceptance."
+    },
+    {
+      "id": "ACT-02",
+      "requirement": "action approval binds normalized arguments, tool/version, target object, actor, tenant, decision receipt, evidence/policy epochs, expiry and a single-use nonce. A changed payload or expired/revoked approval requires new authorization.",
+      "status": "Partial",
+      "implementation": [
+        "src/actions.rs"
+      ],
+      "evidence_or_remaining": "Approval/epoch fencing, durable effect keys, atomic internal tickets and HTTP ambiguity reconciliation; real destination contracts and compensating adapters require acceptance."
+    },
+    {
+      "id": "ACT-03",
+      "requirement": "immediately before sending an effect, refresh actor authorization, source/policy eligibility and external preconditions. Use destination-side conditional writes or fencing where available. A local precheck alone cannot atomically prevent a remote change between check and effect; unsupported connectors must disclose that residual race and require constrained/human execution.",
+      "status": "Partial",
+      "implementation": [
+        "src/actions.rs"
+      ],
+      "evidence_or_remaining": "Approval/epoch fencing, durable effect keys, atomic internal tickets and HTTP ambiguity reconciliation; real destination contracts and compensating adapters require acceptance."
+    },
+    {
+      "id": "ACT-04",
+      "requirement": "use endpoint-enforced idempotency and stable request keys when supported. Keep the key-to-payload association across retries. The destination's retention window is part of the connector contract. Do not promise universal exactly-once external effects.",
+      "status": "Partial",
+      "implementation": [
+        "src/actions.rs"
+      ],
+      "evidence_or_remaining": "Approval/epoch fencing, durable effect keys, atomic internal tickets and HTTP ambiguity reconciliation; real destination contracts and compensating adapters require acceptance."
+    },
+    {
+      "id": "ACT-05",
+      "requirement": "a timeout after a possible effect enters `unknown_completion`. Reconcile by external operation ID or effect query before retry. If the result is still ambiguous, route to a human. Best-effort compensation is a new authorized effect, not a universal rollback.",
+      "status": "Partial",
+      "implementation": [
+        "src/actions.rs"
+      ],
+      "evidence_or_remaining": "Approval/epoch fencing, durable effect keys, atomic internal tickets and HTTP ambiguity reconciliation; real destination contracts and compensating adapters require acceptance."
+    },
+    {
+      "id": "WF-01",
+      "requirement": "workflows are versioned, durable, resumable and bounded. Support branching, retries, timers, approval waits, failure queues and cancellation. Pin long-lived workflow resources; upgrading a workflow follows an explicit migration strategy.",
+      "status": "Partial",
+      "implementation": [
+        "src/workflows.rs"
+      ],
+      "evidence_or_remaining": "Pinned durable plans/state machines, branching, human waits, timers, bounded failures and cancellation; automatic workflow-version migration is not implemented."
+    },
+    {
+      "id": "LANG-01",
+      "requirement": "response plans identify speech act, approved facts, missing fields, disclosures, hidden/restricted facts, tone and length. P0 realizes plans through reviewed templates, grammar rules, typed slot filling, and short attributed excerpts.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Reviewed template/grammar variation and protected slots; no unconstrained composition or general paraphrase-equivalence proof."
+    },
+    {
+      "id": "LANG-02",
+      "requirement": "unsupported free-form composition uses a safe reviewed explanation or clarification. Protect identifiers, numeric values, units, dates and negation from paraphrase drift. Native responses should be useful and clear within the domain; unconstrained literary fluency is outside the contract.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Reviewed template/grammar variation and protected slots; no unconstrained composition or general paraphrase-equivalence proof."
+    },
+    {
+      "id": "LANG-03",
+      "requirement": "repetition control varies approved wording but never suppresses a necessary warning, changes a rule outcome, or rewards unsupported novelty. Domain terms override generic sequence fluency judgments. Low corpus likelihood is not grounds to reject a correct uncommon serial number or technical term.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Reviewed template/grammar variation and protected slots; no unconstrained composition or general paraphrase-equivalence proof."
+    },
+    {
+      "id": "LANG-04",
+      "requirement": "store source licenses and reuse restrictions with phrase candidates. Do not stitch long protected excerpts into apparently original text. Enforce permitted excerpt length and attribution per source policy; avoid a universal copyrighted-content threshold.",
+      "status": "Partial",
+      "implementation": [
+        "packs",
+        "crates/sami-research/src/validation.rs"
+      ],
+      "evidence_or_remaining": "Source/pack rights metadata and reviewed generated templates exist; arbitrary corpus license automation and phrase-reuse accounting are not supplied."
+    },
+    {
+      "id": "LANG-05",
+      "requirement": "never send hidden/restricted facts to a verbalizer merely to instruct it not to reveal them. Output checks compare protected slots and required disclosures; unsupported additions trigger repair or template fallback. General semantic equivalence cannot be proved by a simple text matcher.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-intelligence"
+      ],
+      "evidence_or_remaining": "Reviewed template/grammar variation and protected slots; no unconstrained composition or general paraphrase-equivalence proof."
+    },
+    {
+      "id": "LEARN-01",
+      "requirement": "episodic memory records pre-state, action, policy/source versions, intervention/approval, external outcome, delay, censoring, reviewer label, and evidence provenance. A thumbs-up measures satisfaction unless validated as another label; it is not proof of correctness or causal success.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-research/src/learning.rs"
+      ],
+      "evidence_or_remaining": "Feedback quarantine, validation, low-risk bandits and immutable shadow promotions; live canary rollout, long-term retention and outcome attribution require further work."
+    },
+    {
+      "id": "LEARN-02",
+      "requirement": "feedback enters quarantine. Deduplicate, detect suspicious sources, resolve label disputes, and evaluate candidate changes on independent data. Tenant-local learning is default. Shared learning requires explicit permitted use and anonymization; removing PII is not automatically sufficient for privacy.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-research/src/learning.rs"
+      ],
+      "evidence_or_remaining": "Feedback quarantine, validation, low-risk bandits and immutable shadow promotions; live canary rollout, long-term retention and outcome attribution require further work."
+    },
+    {
+      "id": "LEARN-03",
+      "requirement": "memory retention uses business obligations, purpose/consent, source authority, risk, reuse utility, redundancy and storage budgets. Rare critical policy facts remain pinned. Retire the v1 multiplicative importance formula; reward and frequency cannot decide truth or retention by themselves.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "docs/operations.md"
+      ],
+      "evidence_or_remaining": "Governed records/tombstones and bounded stores exist; automated consent/retention prioritization and safe compaction remain."
+    },
+    {
+      "id": "LEARN-04",
+      "requirement": "contextual bandits may choose among preapproved low-risk wording or clarification strategies. Record action eligibility, exploration probability, delayed outcome and exposure cohort. Never explore payout, safety, permission, or source-trust choices. Off-policy evaluation depends on support and valid propensity data; it cannot prove results for actions never observed.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs",
+        "crates/sami-research/src/learning.rs"
+      ],
+      "evidence_or_remaining": "Feedback quarantine, validation, low-risk bandits and immutable shadow promotions; live canary rollout, long-term retention and outcome attribution require further work."
+    },
+    {
+      "id": "LEARN-05",
+      "requirement": "promotion creates an immutable artifact with lineage, evaluation report, reviewer, limits and rollback plan. Shadow first, then a bounded canary, then wider rollout only after risk/coverage checks. A rollback restores the prior artifact and reconciles pending runs; it does not erase completed effects.",
+      "status": "Partial",
+      "implementation": [
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Promotion requires review/evaluation/holdout metadata and creates immutable shadow-only artifact. No automatic live canary or broad deployment activation."
+    },
+    {
+      "id": "R-01",
+      "requirement": "define a restricted DSL with typed comparisons, units, relational joins, valid-time filters, predicates, known subprocedure calls, clarification and escalation. Candidate programs cannot access networks, file systems, secrets, or unrestricted code execution.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/program.rs",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Restricted relational/typed DSL and leakage-controlled enumerative threshold synthesis; library compression, general procedure learning and customer transfer gates remain."
+    },
+    {
+      "id": "R-02",
+      "requirement": "use enumerative/syntax-guided search and library compression under a complexity budget. Selection combines training/inner-validation task loss, program length, cost and constraint violations. The final third-family transfer set stays locked and unused for selection/tuning. Minimum description length encourages compact explanations; it does not certify truth.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/program.rs",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Restricted relational/typed DSL and leakage-controlled enumerative threshold synthesis; library compression, general procedure learning and customer transfer gates remain."
+    },
+    {
+      "id": "R-03",
+      "requirement": "each candidate declares input/output schema, pre/postconditions, permitted scope, evidence/policy dependencies, termination limits, learned-from episode IDs, test cases and known counterexamples. An approved procedure may be invalidated by later source/policy corrections.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/program.rs",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Restricted relational/typed DSL and leakage-controlled enumerative threshold synthesis; library compression, general procedure learning and customer transfer gates remain."
+    },
+    {
+      "id": "R-04",
+      "requirement": "review counterexamples, run property/metamorphic tests, shadow in the domain simulator, and require authorized human promotion. No learned rule silently enters production. Stop or narrow the research if gains vanish under leakage-controlled tests or review costs outweigh savings.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/program.rs",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Restricted relational/typed DSL and leakage-controlled enumerative threshold synthesis; library compression, general procedure learning and customer transfer gates remain."
+    },
+    {
+      "id": "OPS-01",
+      "requirement": "development Compose profile runs API, worker, console and durable store with sample licensed/de-identified data. Production profiles declare dependencies and readiness checks. No paid language API is required for native mode.",
+      "status": "Partial",
+      "implementation": [
+        "deploy",
+        "src/main.rs",
+        "src/backup.rs"
+      ],
+      "evidence_or_remaining": "Runnable profiles, health, metrics, snapshots/tombstones and tested database transactions; infrastructure scans, HA, load/SLO and disaster drills require operators."
+    },
+    {
+      "id": "OPS-02",
+      "requirement": "schemas and domain packs are versioned. Migrations test rollback/forward recovery and pinned workflow compatibility. Safe deployment keeps old and new artifacts available for outstanding runs.",
+      "status": "Partial",
+      "implementation": [
+        "deploy",
+        "src/main.rs",
+        "src/backup.rs"
+      ],
+      "evidence_or_remaining": "Runnable profiles, health, metrics, snapshots/tombstones and tested database transactions; infrastructure scans, HA, load/SLO and disaster drills require operators."
+    },
+    {
+      "id": "IDX-01",
+      "requirement": "if adopted, use licensed, domain-scoped corpora and immutable checksummed shards. Manifest records tokenizer/version, corpus digest, document boundaries, shard pointer width, endianness, count, format version and source rights. Corrupt or incompatible shards fail closed.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/sequence.rs",
+        "crates/sami-research/src/semantic.rs"
+      ],
+      "evidence_or_remaining": "Document-bounded sequence index, checksums, PPMI/LSA and capacity limits; production immutable-shard compaction and large-corpus TCO are not implemented."
+    },
+    {
+      "id": "IDX-02",
+      "requirement": "sequence queries never cross document or tenant boundaries. Reserve boundary symbols and validate hot/cold merge semantics. Context-hash collisions require original-context verification. Counts from overlapping shard versions must not be double-counted.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/sequence.rs",
+        "crates/sami-research/src/semantic.rs"
+      ],
+      "evidence_or_remaining": "Document-bounded sequence index, checksums, PPMI/LSA and capacity limits; production immutable-shard compaction and large-corpus TCO are not implemented."
+    },
+    {
+      "id": "IDX-03",
+      "requirement": "dynamic memory comes from a durable journal and small hot indexes. Compaction creates a new artifact, validates it, then atomically switches the manifest. Old artifacts remain for authorized replay and retire under retention/deletion rules.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/sequence.rs",
+        "crates/sami-research/src/semantic.rs"
+      ],
+      "evidence_or_remaining": "Document-bounded sequence index, checksums, PPMI/LSA and capacity limits; production immutable-shard compaction and large-corpus TCO are not implemented."
+    },
+    {
+      "id": "IDX-04",
+      "requirement": "before building, estimate peak RAM, temporary disk, final disk, elapsed time, source duplication and operational copies. Refuse a build when capacity policy fails. Report deletion/compaction and incremental update cost in TCO.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/sequence.rs",
+        "crates/sami-research/src/semantic.rs"
+      ],
+      "evidence_or_remaining": "Document-bounded sequence index, checksums, PPMI/LSA and capacity limits; production immutable-shard compaction and large-corpus TCO are not implemented."
+    },
+    {
+      "id": "IDX-05",
+      "requirement": "retention prioritizes source obligations and utility, not popularity alone. Cap sparse co-occurrence vocabulary and counts; prune with measurable recall loss. A billion-token phrase corpus is not required for the first useful service desk application.",
+      "status": "Bounded",
+      "implementation": [
+        "crates/sami-research/src/sequence.rs",
+        "crates/sami-research/src/semantic.rs"
+      ],
+      "evidence_or_remaining": "Document-bounded sequence index, checksums, PPMI/LSA and capacity limits; production immutable-shard compaction and large-corpus TCO are not implemented."
+    },
+    {
+      "id": "SEC-01",
+      "requirement": "derive tenant/principal scope from authenticated identity. Never trust a body-supplied tenant ID as authorization. API keys are scoped, hashed at rest, revocable and rotated; console uses OIDC. RBAC governs roles, while ABAC applies dealer, workspace, purpose and source-level constraints.",
+      "status": "Partial",
+      "implementation": [
+        "src/auth.rs",
+        "sdk",
+        "console"
+      ],
+      "evidence_or_remaining": "Random hashed scoped keys and local-registry RS256/ES256 OIDC auth implemented. Full console browser PKCE and provider-specific integration tests are pending."
+    },
+    {
+      "id": "SEC-02",
+      "requirement": "enforce isolation in database queries, graph traversals, search prefilters, cache keys, bundle distribution, traces, exports and receipt inspection. Database row policies are defense in depth, not a substitute for application checks. Test cross-tenant identifiers and malicious mixed-scope requests.",
+      "status": "Partial",
+      "implementation": [
+        "src/auth.rs",
+        "src/crypto.rs",
+        "src/service.rs",
+        "deploy"
+      ],
+      "evidence_or_remaining": "Scoped keys/OIDC mappings, encryption/signatures, current ACLs, inert document/DSL input and effect kill switches; independent security review and full KMS/isolation controls remain."
+    },
+    {
+      "id": "SEC-03",
+      "requirement": "retrieved text and external tool output cannot change executable policies, permission scopes, tool definitions, or goals. Treat prompt injection and poisoned memory as data attacks even in native mode; regex/rule systems can also be abused.",
+      "status": "Partial",
+      "implementation": [
+        "src/auth.rs",
+        "src/crypto.rs",
+        "src/service.rs",
+        "deploy"
+      ],
+      "evidence_or_remaining": "Scoped keys/OIDC mappings, encryption/signatures, current ACLs, inert document/DSL input and effect kill switches; independent security review and full KMS/isolation controls remain."
+    },
+    {
+      "id": "SEC-04",
+      "requirement": "use TLS for connected services, encryption at rest, managed secrets, scoped connector identities, dependency scanning, SBOMs, signed releases and restricted worker networks. Protect index/bundle signing keys and receipt-verifier trust roots.",
+      "status": "Partial",
+      "implementation": [
+        "src/crypto.rs",
+        "deploy",
+        ".github/workflows/ci.yml"
+      ],
+      "evidence_or_remaining": "Encryption/signatures, TLS recipe, secrets environment, audits and CI SBOM/image gates exist; image scans unrun locally, KMS rotation/signed binary releases require infrastructure."
+    },
+    {
+      "id": "SEC-05",
+      "requirement": "run file/OCR parsers and research DSL evaluators in isolated, resource-limited workers. Validate archive paths, decompression ratios, MIME types and file sizes. No untrusted document can invoke a shell or fetch arbitrary internal URLs.",
+      "status": "Partial",
+      "implementation": [
+        "crates/sami-research",
+        "examples/research/pdf_extract.py"
+      ],
+      "evidence_or_remaining": "Closed bounded DSL cannot execute arbitrary code/IO; unsupported direct PDF fails explicitly. External PDF extraction example exists; sandboxed OCR/parser service is not supplied."
+    },
+    {
+      "id": "SEC-06",
+      "requirement": "classify PII and sensitive operational information, minimize collection, restrict purpose, configure retention, and mask logs/exports. Document which optional models receive data and where processing occurs. Certification and legal-compliance claims require separate evidence and review.",
+      "status": "Partial",
+      "implementation": [
+        "src/storage.rs",
+        "docs/operations.md"
+      ],
+      "evidence_or_remaining": "Encrypted payloads, scoped exports and text-minimizing logs exist. Automatic PII classification and jurisdictional retention certification remain deployment-specific."
+    },
+    {
+      "id": "SEC-07",
+      "requirement": "keep append-only minimal audit events for access, source/rule publication, overrides, approvals, execution, learning promotion, deletion and key changes. Sensitive payloads are separately governed so deletion does not require preserving private text forever.",
+      "status": "Partial",
+      "implementation": [
+        "src/storage.rs",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Mutation/publication/approval/execution/deletion/key audit events are immutable/minimal. Comprehensive read-access audit is not yet implemented."
+    },
+    {
+      "id": "SEC-08",
+      "requirement": "provide kill switches for tool effects, learning promotion, source/bundle eligibility and compromised connector keys. Incident response identifies affected tenants/receipts, quarantines authority, restores safe versions, and creates accountable follow-up tasks.",
+      "status": "Partial",
+      "implementation": [
+        "src/auth.rs",
+        "src/crypto.rs",
+        "src/service.rs",
+        "deploy"
+      ],
+      "evidence_or_remaining": "Scoped keys/OIDC mappings, encryption/signatures, current ACLs, inert document/DSL input and effect kill switches; independent security review and full KMS/isolation controls remain."
+    },
+    {
+      "id": "API-01",
+      "requirement": "SDKs for TypeScript and Python are P0; Rust SDK follows P1. Client retries distinguish safe reads, idempotent writes and uncertain effects. Errors include request ID and recovery action without secrets, stack traces or internal paths.",
+      "status": "Partial",
+      "implementation": [
+        "src/api.rs",
+        "sdk"
+      ],
+      "evidence_or_remaining": "Python/TypeScript/Rust clients, typed errors, effect idempotency, CAS and resumable audit pages; full live event streams/universal mutation ledger remain."
+    },
+    {
+      "id": "API-02",
+      "requirement": "optimistic concurrency is required for state/control changes; stale revisions return conflict. API mutation retries use an idempotency key bound to payload and principal. SSE streams decision, response and action-state events with resumable event IDs where supported.",
+      "status": "Partial",
+      "implementation": [
+        "src/api.rs",
+        "sdk"
+      ],
+      "evidence_or_remaining": "Python/TypeScript/Rust clients, typed errors, effect idempotency, CAS and resumable audit pages; full live event streams/universal mutation ledger remain."
+    },
+    {
+      "id": "DX-01",
+      "requirement": "CLI supports init, serve, ingest, validate, publish, evaluate, replay, doctor, export, backup and restore. Provide a runnable launch-domain example, schema documentation, supported-intent list, migration instructions and an offline tutorial. A ten-minute local demonstration is a usability target to verify.",
+      "status": "Functional",
+      "implementation": [
+        "src/main.rs",
+        "examples",
+        "docs"
+      ],
+      "evidence_or_remaining": "All named CLI commands, source examples, API/SDK/user/deployment/operations/offline guides included; ten-minute usability target unmeasured."
+    },
+    {
+      "id": "PACK-01",
+      "requirement": "validate schema compatibility, dependencies, policy conflicts, missing response slots, unreachable workflow states, permitted licenses and required fixtures before signing/publishing. Manifest pins hashes, versions and supported execution modes.",
+      "status": "Partial",
+      "implementation": [
+        "crates/sami-research/src/validation.rs",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Schema/rights/fixture checks, reviewed publication, version pinning and invalidation; complete migration impact analysis and independent signed pack distribution remain."
+    },
+    {
+      "id": "PACK-02",
+      "requirement": "show migration impact on outstanding sessions and actions. New policy packs cannot silently reinterpret old approvals. Publish immutable versions with rollback and explicit live-authority rules.",
+      "status": "Partial",
+      "implementation": [
+        "crates/sami-research/src/validation.rs",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Schema/rights/fixture checks, reviewed publication, version pinning and invalidation; complete migration impact analysis and independent signed pack distribution remain."
+    },
+    {
+      "id": "ADMIN-01",
+      "requirement": "explain changes in terms a service manager can use: which assets/cases are affected, what conclusion changed, why, and who must review. Raw graph visualization is optional; the task outcome is primary.",
+      "status": "Partial",
+      "implementation": [
+        "console/src/App.tsx",
+        "src/api.rs",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Policy diff, evidence views and separate pack review role; complete case impact dashboard and measured onboarding economics require pilot work."
+    },
+    {
+      "id": "ADMIN-02",
+      "requirement": "separate edit and approve roles for consequential policy publication. Every production artifact has an owner, change rationale, review record and release report. Provide deterministic policy tests before approval.",
+      "status": "Partial",
+      "implementation": [
+        "console/src/App.tsx",
+        "src/api.rs",
+        "src/service.rs"
+      ],
+      "evidence_or_remaining": "Policy diff, evidence views and separate pack review role; complete case impact dashboard and measured onboarding economics require pilot work."
+    },
+    {
+      "id": "ADMIN-03",
+      "requirement": "capture authoring and integration hours. If packs require extensive bespoke engineering for every customer, the proposed scaling advantage fails. By the third pilot, target deployment within ten working days after clean approved source access; record actual effort and exclusions.",
+      "status": "External gate",
+      "implementation": [
+        "docs/evaluation.md"
+      ],
+      "evidence_or_remaining": "Integration/onboarding effort must be recorded in customer pilots; no measured third-pilot ten-day claim."
+    },
+    {
+      "id": "OPS-03",
+      "requirement": "record p50/p95/p99, throughput, CPU, RSS, page faults, IO, corpus/shard size, request mix, concurrent load, cache conditions, accuracy and coverage. Report timeouts and abstentions; do not improve speed by hiding difficult requests.",
+      "status": "Partial",
+      "implementation": [
+        "src/api.rs",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Request/decision counters and toy baseline runtime reports exist. Full p50/p95/p99/RSS/IO/load monitoring under production traffic is pending."
+    },
+    {
+      "id": "OPS-04",
+      "requirement": "back up durable state, approved packs and sources under retention policy. Target connected-service RPO <= 15 minutes and RTO <= 4 hours. A quarterly restore drill, tombstone reapplication and readiness verification substantiate these goals. Local device journal loss follows its documented backup policy.",
+      "status": "Partial",
+      "implementation": [
+        "src/backup.rs",
+        "tests/runtime.rs",
+        "docs/operations.md"
+      ],
+      "evidence_or_remaining": "Encrypted snapshot/restore applies newer tombstones before serving; PostgreSQL path tested. Automated schedule/retention and measured RPO/RTO drills require deployment."
+    },
+    {
+      "id": "OPS-05",
+      "requirement": "expose per-stage traces and operational alerts for stale indexes, repair backlog, connector ambiguity, failed publication, storage limits, drift and authority expiry. Logs avoid source text and identifiers by default.",
+      "status": "Partial",
+      "implementation": [
+        "src/api.rs",
+        "docs/operations.md"
+      ],
+      "evidence_or_remaining": "Structured logging, authenticated counters and durable events exist. Distributed stage spans and alerting integrations are pending."
+    },
+    {
+      "id": "OPS-06",
+      "requirement": "loss of the authoritative store, mandatory policy artifact, or compatible source epoch blocks effects and unverified decisions. Informational cached results require an explicitly permitted degraded mode. Do not market a cache hit as full availability.",
+      "status": "Partial",
+      "implementation": [
+        "deploy",
+        "src/main.rs",
+        "src/backup.rs"
+      ],
+      "evidence_or_remaining": "Runnable profiles, health, metrics, snapshots/tombstones and tested database transactions; infrastructure scans, HA, load/SLO and disaster drills require operators."
+    },
+    {
+      "id": "EVAL-01",
+      "requirement": "collect consented, de-identified real cases plus synthetic corner cases. Lock at least 1,200 test cases per P0 task as an initial plan, with at least 600 accepted cases where the severe-error gate is assessed. Increase sample size if clustering, rare failures or subgroup analysis require it.",
+      "status": "External gate",
+      "implementation": [
+        "docs/evaluation.md",
+        "tests",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Synthetic adversarial contract tests and honest five-baseline toy harness exist; consented 1200-case locked task sets, severe-risk evidence and real-customer comparisons are absent."
+    },
+    {
+      "id": "EVAL-02",
+      "requirement": "split by time, equipment family and source revision. Include contradictions, missing records, negation, wrong serials, stale policies, ACL changes, unknown completion, and unseen intent. Prevent evaluation labels from entering memory.",
+      "status": "External gate",
+      "implementation": [
+        "docs/evaluation.md",
+        "tests",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Synthetic adversarial contract tests and honest five-baseline toy harness exist; consented 1200-case locked task sets, severe-risk evidence and real-customer comparisons are absent."
+    },
+    {
+      "id": "EVAL-03",
+      "requirement": "primary score is correct, authorized case outcome plus human-review burden. Verify database/workflow end state. Independently review factual explanation and source applicability. Report repeated-trial consistency, risk/coverage curves, cohort metrics and uncertainty.",
+      "status": "External gate",
+      "implementation": [
+        "docs/evaluation.md",
+        "tests",
+        "crates/sami-research/examples/benchmark.rs"
+      ],
+      "evidence_or_remaining": "Synthetic adversarial contract tests and honest five-baseline toy harness exist; consented 1200-case locked task sets, severe-risk evidence and real-customer comparisons are absent."
+    }
+  ]
+}

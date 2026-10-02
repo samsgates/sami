@@ -1,0 +1,462 @@
+{
+  "data_classification": "generated_demo_not_customer_validation",
+  "as_of": "2026-10-02",
+  "known_at": "2026-10-02T06:00:00Z",
+  "sources": [
+    {
+      "id": "erp_assets",
+      "revision": "19",
+      "status": "approved",
+      "epoch": 1,
+      "content": "Generated asset and entitlement export.",
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ],
+      "license": "generated_demo",
+      "source_family": "erp_primary",
+      "permission_checked_at": "2026-10-02T06:00:00Z",
+      "max_age_seconds": null,
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "local_authority": true
+    },
+    {
+      "id": "bulletins",
+      "revision": "2",
+      "status": "approved",
+      "epoch": 1,
+      "content": "Generated PX320 thermal and hydraulic service routing bulletins.",
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ],
+      "license": "generated_demo",
+      "source_family": "oem_bulletin",
+      "permission_checked_at": "2026-10-02T06:00:00Z",
+      "max_age_seconds": null,
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "local_authority": true
+    }
+  ],
+  "claims": [
+    {
+      "id": "asset_unit_42_serial_number",
+      "subject": "asset:unit_42",
+      "predicate": "serial_number",
+      "value": "1200",
+      "value_type": "string",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1200/serial_number",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_42_product",
+      "subject": "asset:unit_42",
+      "predicate": "product",
+      "value": "PX320",
+      "value_type": "string",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1200/product",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_42_jurisdiction",
+      "subject": "asset:unit_42",
+      "predicate": "jurisdiction",
+      "value": "IN",
+      "value_type": "string",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1200/jurisdiction",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_42_operating_hours",
+      "subject": "asset:unit_42",
+      "predicate": "operating_hours",
+      "value": 2400,
+      "value_type": "number",
+      "unit": "hour",
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1200/operating_hours",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_42_in_service_date",
+      "subject": "asset:unit_42",
+      "predicate": "in_service_date",
+      "value": "2025-08-12",
+      "value_type": "date",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1200/in_service_date",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_42_proof_of_service",
+      "subject": "asset:unit_42",
+      "predicate": "proof_of_service",
+      "value": true,
+      "value_type": "boolean",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1200/proof_of_service",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_84_serial_number",
+      "subject": "asset:unit_84",
+      "predicate": "serial_number",
+      "value": "1600",
+      "value_type": "string",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1600/serial_number",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_84_product",
+      "subject": "asset:unit_84",
+      "predicate": "product",
+      "value": "PX320",
+      "value_type": "string",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1600/product",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_84_jurisdiction",
+      "subject": "asset:unit_84",
+      "predicate": "jurisdiction",
+      "value": "IN",
+      "value_type": "string",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1600/jurisdiction",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_84_operating_hours",
+      "subject": "asset:unit_84",
+      "predicate": "operating_hours",
+      "value": 800,
+      "value_type": "number",
+      "unit": "hour",
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1600/operating_hours",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_84_in_service_date",
+      "subject": "asset:unit_84",
+      "predicate": "in_service_date",
+      "value": "2025-08-12",
+      "value_type": "date",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1600/in_service_date",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "asset_unit_84_proof_of_service",
+      "subject": "asset:unit_84",
+      "predicate": "proof_of_service",
+      "value": true,
+      "value_type": "boolean",
+      "unit": null,
+      "source_id": "erp_assets",
+      "source_revision": "19",
+      "source_family": "erp_primary",
+      "locator": "row:1600/proof_of_service",
+      "status": "approved",
+      "valid_from": "2025-08-12",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {},
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "bulletin_overheating",
+      "subject": "global",
+      "predicate": "service_bulletin",
+      "value": {
+        "issue": "issue.overheating",
+        "instruction": "Categorical routing only; no mechanical repair instructions."
+      },
+      "value_type": "object",
+      "unit": null,
+      "source_id": "bulletins",
+      "source_revision": "2",
+      "source_family": "oem_bulletin",
+      "locator": "page:1",
+      "status": "approved",
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {
+        "product": "PX320",
+        "jurisdiction": "IN",
+        "serial_range": [
+          1000,
+          2000
+        ]
+      },
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    },
+    {
+      "id": "bulletin_fluid_leak",
+      "subject": "global",
+      "predicate": "service_bulletin",
+      "value": {
+        "issue": "issue.fluid_leak",
+        "instruction": "Categorical routing only; no mechanical repair instructions."
+      },
+      "value_type": "object",
+      "unit": null,
+      "source_id": "bulletins",
+      "source_revision": "2",
+      "source_family": "oem_bulletin",
+      "locator": "page:1",
+      "status": "approved",
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "system_from": "2026-10-01T00:00:00Z",
+      "system_to": null,
+      "depends_on": [],
+      "authority": "local_authority",
+      "qualifiers": {
+        "product": "PX320",
+        "jurisdiction": "IN",
+        "serial_range": [
+          1000,
+          2000
+        ]
+      },
+      "acl": [
+        "service.read"
+      ],
+      "purpose": [
+        "service_prequalification"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "task": "service_triage",
+      "input": {
+        "message": "Serial 1600 is overheating",
+        "asset_id": "asset:unit_84",
+        "as_of": "2026-10-02",
+        "known_at": "2026-10-02T06:00:00Z"
+      }
+    },
+    {
+      "task": "warranty_prequalification",
+      "input": {
+        "message": "Check warranty for serial 1600",
+        "asset_id": "asset:unit_84",
+        "as_of": "2026-10-02",
+        "known_at": "2026-10-02T06:00:00Z"
+      }
+    },
+    {
+      "task": "warranty_prequalification",
+      "input": {
+        "message": "Check warranty for serial 1200",
+        "asset_id": "asset:unit_42",
+        "as_of": "2026-10-02",
+        "known_at": "2026-10-02T06:00:00Z"
+      }
+    }
+  ]
+}

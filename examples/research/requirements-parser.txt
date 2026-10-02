@@ -1,0 +1,2 @@
+# Optional isolated text-PDF parser, outside the production Rust request path.
+pdfplumber==0.11.7

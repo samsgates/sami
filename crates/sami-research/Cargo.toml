@@ -1,0 +1,17 @@
+[package]
+name = "sami-research"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.86"
+description = "Bounded pure research, evaluation, ingestion and domain-pack validation for SAMI"
+license = "Apache-2.0"
+
+[dependencies]
+serde = { version = "=1.0.219", features = ["derive"] }
+serde_json = "=1.0.143"
+sha2 = "=0.10.9"
+hex = "=0.4.3"
+csv = "=1.3.1"
+html5ever = "=0.35.0"
+thiserror = "2.0"
+

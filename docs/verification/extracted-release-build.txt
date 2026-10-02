@@ -1,0 +1,4 @@
+   Compiling sami-intelligence v0.2.0 (<extracted-source>/crates/sami-intelligence)
+   Compiling sami-research v0.2.0 (<extracted-source>/crates/sami-research)
+   Compiling sami v0.2.0 (<extracted-source>)
+    Finished `release` profile [optimized] target(s) in 22.25s

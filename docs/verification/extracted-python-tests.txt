@@ -1,0 +1,9 @@
+test_authenticated_payload_and_encoded_id (test_client.ClientTest.test_authenticated_payload_and_encoded_id) ... ok
+test_key_and_url_validation (test_client.ClientTest.test_key_and_url_validation) ... ok
+test_redirect_is_not_followed (test_client.ClientTest.test_redirect_is_not_followed) ... ok
+test_rejection_is_not_retried (test_client.ClientTest.test_rejection_is_not_retried) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.516s
+
+OK

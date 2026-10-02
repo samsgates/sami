@@ -1,0 +1,6 @@
+SAMI source release 0.2.0
+Copyright 2026 SAMI contributors.
+Code and generated demonstration packs are distributed under Apache-2.0.
+Third-party dependencies retain their respective licenses; create an SBOM for an actual release image.
+The included PRD records research sources and proposed product/release targets.
+Customer documents, corpora and connector data are not licensed by this repository.

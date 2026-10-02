@@ -1,0 +1,52 @@
+{
+  "version": "0.2.0",
+  "checked_at_utc": "2026-10-02T02:32:18.569858+00:00",
+  "environment": {
+    "os": "macOS arm64",
+    "rust": "1.86.0",
+    "node": "22.23.3",
+    "python": "3.11"
+  },
+  "tests": {
+    "rust_workspace": 70,
+    "postgres_integration": 1,
+    "console": 3,
+    "typescript_sdk": 3,
+    "python_sdk": 4,
+    "rust_sdk": 2,
+    "total": 83
+  },
+  "checks": {
+    "rustfmt": "passed",
+    "clippy_all_targets_warnings_denied": "passed",
+    "optimized_workspace_build": "passed",
+    "console_typescript_vite_build": "passed",
+    "three_compose_profile_configs": "passed",
+    "end_to_end_python_ticket_receipt_replay": "passed",
+    "end_to_end_typescript_warranty": "passed",
+    "durable_workflow_example": "passed",
+    "native_library_example": "passed",
+    "five_baseline_generated_benchmark": "passed",
+    "browser_case_and_response": "passed",
+    "numbered_prd_requirement_inventory": 102,
+    "api_operation_inventory": 49,
+    "embedded_assets": "matching",
+    "fresh_zip_extraction": "passed: core/SDK tests, optimized Rust build and clean console build with offline locked caches",
+    "zip_integrity_and_sha256_inventory": "passed"
+  },
+  "security": {
+    "console_npm_vulnerabilities": 0,
+    "typescript_sdk_npm_vulnerabilities": 0,
+    "rust_sdk_audit": "passed without exceptions",
+    "runtime_rust_audit": "passed with one inactive optional dependency exception",
+    "exception": "RUSTSEC-2023-0071: SQLx meta-lock includes optional MySQL/RSA; cargo tree --locked -i rsa --target all prints nothing. Guard script fails if activated or if dependency inspection fails."
+  },
+  "not_run_or_unproven": [
+    "Docker image build and Trivy/SBOM gate locally (daemon unavailable)",
+    "Kubernetes application, HA/failover/load/SLO measurements",
+    "Real identity-provider and third-party connector certification",
+    "Independent penetration/accessibility/fuzz audit",
+    "Customer locked-case/reliability/economics gates",
+    "Frontier LLM comparison or general intelligence superiority"
+  ]
+}

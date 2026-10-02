@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sami-client"
+version = "0.2.0"
+description = "SAMI native API client with explicit effect and reconciliation semantics"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sami_client*"]

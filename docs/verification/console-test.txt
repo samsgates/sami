@@ -1,0 +1,13 @@
+
+> @sami/console@0.2.0 test
+> vitest run
+
+
+ RUN  v4.1.11 <source-root>/console
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  07:59:13
+   Duration  85ms (transform 16ms, setup 0ms, import 20ms, tests 10ms, environment 0ms)
+

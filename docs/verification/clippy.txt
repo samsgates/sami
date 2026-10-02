@@ -1,0 +1,2 @@
+    Checking sami v0.2.0 (<source-root>)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.33s

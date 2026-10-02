@@ -1,0 +1,108 @@
+name: Verify SAMI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.86.0
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: python3 deploy/scripts/check-assets.py
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo test --workspace --locked
+      - run: cargo build --release --workspace --locked
+      - name: Rust SDK
+        working-directory: sdk/rust
+        run: |
+          cargo fmt -- --check
+          cargo test --locked
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.6-alpine
+        env: { POSTGRES_DB: sami_test, POSTGRES_USER: sami, POSTGRES_PASSWORD: generated-ci-only-password }
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U sami -d sami_test"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.86.0
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --locked --test postgres -- --ignored
+        env: { SAMI_TEST_POSTGRES_URL: 'postgres://sami:generated-ci-only-password@127.0.0.1:5432/sami_test' }
+  console-and-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            console/package-lock.json
+            sdk/typescript/package-lock.json
+      - working-directory: console
+        run: |
+          npm ci --no-audit --no-fund
+          npm run test
+          npm run build
+      - working-directory: sdk/typescript
+        run: |
+          npm ci --no-audit --no-fund
+          npm test
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - working-directory: sdk/python
+        run: python -m unittest discover -s tests -v
+  supply-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Rust dependency audit
+        run: |
+          cargo install cargo-audit --locked
+          sh deploy/scripts/audit-rust.sh
+      - name: JavaScript dependency audit
+        working-directory: console
+        run: |
+          npm ci --no-fund
+          npm audit --audit-level=high
+      - name: SDK dependency audit
+        working-directory: sdk/typescript
+        run: |
+          npm ci --no-fund
+          npm audit --audit-level=high
+      - name: Build runtime image (no push)
+        run: docker build -f deploy/Dockerfile -t sami-api:ci .
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: sami-api:ci
+          output-file: sami-sbom.spdx.json
+          upload-artifact: false
+      - name: Container high/critical vulnerability gate
+        uses: aquasecurity/trivy-action@0.29.0
+        with:
+          image-ref: sami-api:ci
+          format: table
+          exit-code: '1'
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sami-sbom
+          path: sami-sbom.spdx.json

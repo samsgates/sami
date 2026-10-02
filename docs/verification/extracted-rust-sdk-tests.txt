@@ -1,0 +1,16 @@
+   Compiling sami-client v0.2.0 (<extracted-source>/sdk/rust)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.55s
+     Running unittests src/lib.rs (<build-cache-root>/sdk/rust/target/debug/deps/sami_client-36d2e1fa1b8b77ba)
+
+running 2 tests
+test tests::rejects_credentials_in_base_url ... ok
+test tests::preserves_api_base_and_encodes_resource_identifier ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests sami_client
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

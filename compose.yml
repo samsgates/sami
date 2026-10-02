@@ -1,0 +1,68 @@
+name: sami
+services:
+  database:
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_DB: sami
+      POSTGRES_USER: sami
+      POSTGRES_PASSWORD: ${SAMI_POSTGRES_PASSWORD:?Generate a PostgreSQL password in .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U sami -d sami']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    networks: [backend]
+
+  api:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: sami-api:local
+    environment:
+      SAMI_DATABASE_URL: postgres://sami:${SAMI_POSTGRES_PASSWORD}@database:5432/sami
+      SAMI_ENCRYPTION_KEY: ${SAMI_ENCRYPTION_KEY:?Generate a 64-character hexadecimal key}
+      SAMI_SIGNING_KEY: ${SAMI_SIGNING_KEY:?Generate a separate 64-character hexadecimal key}
+      SAMI_BOOTSTRAP_KEY: ${SAMI_BOOTSTRAP_KEY:?Generate a bootstrap credential of at least 32 characters}
+      SAMI_ENV: ${SAMI_ENV:-production}
+      SAMI_DATA_DIR: /var/lib/sami
+      SAMI_CONSOLE_DIR: /opt/sami/console
+      RUST_LOG: ${RUST_LOG:-sami=info,tower_http=info}
+    volumes:
+      - sami-data:/var/lib/sami
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+    read_only: true
+    tmpfs: [/tmp:size=64m,noexec,nosuid]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [backend, frontend]
+
+  console:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.console
+    image: sami-console:local
+    ports:
+      - '127.0.0.1:${SAMI_CONSOLE_PORT:-8088}:8080'
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    read_only: true
+    tmpfs: [/config:size=16m,noexec,nosuid, /data:size=16m,noexec,nosuid]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [frontend]
+
+volumes:
+  postgres-data:
+  sami-data:
+networks:
+  backend:
+    internal: true
+  frontend:

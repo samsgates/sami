@@ -1,0 +1,24 @@
+# Replace the hostname and TLS secret before applying. Requires an ingress controller.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sami
+  namespace: sami
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: '8m'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '60'
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [sami.example.invalid]
+      secretName: sami-tls
+  rules:
+    - host: sami.example.invalid
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sami-console
+                port: {number: 8080}

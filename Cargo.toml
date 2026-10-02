@@ -1,0 +1,51 @@
+[workspace]
+members = ["crates/sami-intelligence", "crates/sami-research"]
+resolver = "2"
+
+[package]
+name = "sami"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.86"
+description = "Correctable memory and controlled operational intelligence runtime"
+license = "Apache-2.0"
+
+[dependencies]
+sami-intelligence = { path = "crates/sami-intelligence" }
+sami-research = { path = "crates/sami-research" }
+axum = { version = "=0.7.9", features = ["macros"] }
+tokio = { version = "=1.47.1", features = ["full"] }
+serde = { version = "=1.0.219", features = ["derive"] }
+serde_json = "=1.0.143"
+sqlx = { version = "=0.8.6", default-features = false, features = ["runtime-tokio-rustls", "sqlite", "postgres", "any"] }
+chrono = { version = "=0.4.41", features = ["serde"] }
+uuid = { version = "=1.18.1", features = ["v4", "serde"] }
+clap = { version = "=4.5.36", features = ["derive", "env"] }
+reqwest = { version = "=0.12.23", default-features = false, features = ["json", "rustls-tls"] }
+tracing = "=0.1.41"
+tracing-subscriber = { version = "=0.3.20", features = ["env-filter", "json"] }
+tower-http = { version = "=0.5.2", features = ["trace", "cors", "fs", "limit", "set-header"] }
+tower = { version = "0.5", features = ["util"] }
+sha2 = "=0.10.9"
+hmac = "0.12.1"
+ed25519-dalek = "2.2.0"
+home = "=0.5.11"
+idna_adapter = "=1.2.0"
+hex = "0.4.3"
+base64 = "0.22.1"
+aes-gcm = "0.10.3"
+rand = "0.8.5"
+thiserror = "2.0"
+url = "2.5"
+jsonwebtoken = { version = "=9.3.1", default-features = false }
+futures-core = "0.3"
+futures-util = "=0.3.31"
+
+[dev-dependencies]
+tempfile = "3.19"
+http-body-util = "0.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true

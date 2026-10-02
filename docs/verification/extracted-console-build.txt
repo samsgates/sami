@@ -1,0 +1,13 @@
+
+> @sami/console@0.2.0 build
+> tsc -b && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 32 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.61 kB │ gzip:  0.37 kB
+dist/assets/index-BURKzYmP.css   10.18 kB │ gzip:  3.16 kB
+dist/assets/index-BcAP6xog.js   229.06 kB │ gzip: 71.39 kB
+✓ built in 322ms

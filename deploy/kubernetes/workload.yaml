@@ -1,0 +1,211 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sami
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sami
+  namespace: sami
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sami-config
+  namespace: sami
+data:
+  SAMI_ENV: production
+  SAMI_DATA_DIR: /var/lib/sami
+  SAMI_CONSOLE_DIR: /opt/sami/console
+  RUST_LOG: sami=info,tower_http=info
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sami-data
+  namespace: sami
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sami-api
+  namespace: sami
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: {app: sami-api}
+  template:
+    metadata:
+      labels: {app: sami-api}
+    spec:
+      serviceAccountName: sami
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: api
+          image: sami-api:local
+          imagePullPolicy: IfNotPresent
+          args: [serve, --host, 0.0.0.0, --port, '8080']
+          envFrom:
+            - configMapRef: {name: sami-config}
+            - secretRef: {name: sami-secrets}
+          ports: [{name: http, containerPort: 8080}]
+          startupProbe:
+            httpGet: {path: /ready, port: http}
+            failureThreshold: 60
+            periodSeconds: 5
+          readinessProbe:
+            httpGet: {path: /ready, port: http}
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 20
+          resources:
+            requests: {cpu: '1', memory: 1Gi}
+            limits: {cpu: '4', memory: 4Gi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts:
+            - {name: data, mountPath: /var/lib/sami}
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: data
+          persistentVolumeClaim: {claimName: sami-data}
+        - name: tmp
+          emptyDir: {sizeLimit: 64Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sami-api
+  namespace: sami
+spec:
+  selector: {app: sami-api}
+  ports: [{name: http, port: 8080, targetPort: http}]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: sami-api-ingress
+  namespace: sami
+spec:
+  podSelector:
+    matchLabels: {app: sami-api}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {app: sami-console}
+      ports: [{protocol: TCP, port: 8080}]
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sami-console-config
+  namespace: sami
+data:
+  Caddyfile: |
+    :8080 {
+      encode gzip
+      header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy no-referrer
+        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+        -Server
+      }
+      handle /v1/* { reverse_proxy sami-api:8080 }
+      handle /health { reverse_proxy sami-api:8080 }
+      handle /ready { reverse_proxy sami-api:8080 }
+      handle /metrics { respond "Private metrics only." 403 }
+      handle {
+        root * /srv
+        try_files {path} /index.html
+        file_server
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sami-console
+  namespace: sami
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: sami-console}
+  template:
+    metadata:
+      labels: {app: sami-console}
+    spec:
+      serviceAccountName: sami
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: console
+          image: sami-console:local
+          imagePullPolicy: IfNotPresent
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe:
+            httpGet: {path: /, port: http}
+          resources:
+            requests: {cpu: 100m, memory: 64Mi}
+            limits: {cpu: '1', memory: 256Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts:
+            - {name: config, mountPath: /etc/caddy/Caddyfile, subPath: Caddyfile, readOnly: true}
+            - {name: data, mountPath: /data}
+            - {name: runtime-config, mountPath: /config}
+      volumes:
+        - name: config
+          configMap: {name: sami-console-config}
+        - name: data
+          emptyDir: {sizeLimit: 32Mi}
+        - name: runtime-config
+          emptyDir: {sizeLimit: 16Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sami-console
+  namespace: sami
+spec:
+  selector: {app: sami-console}
+  ports: [{name: http, port: 8080, targetPort: http}]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: sami-console-ingress
+  namespace: sami
+spec:
+  podSelector:
+    matchLabels: {app: sami-console}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: ingress-nginx}
+      ports: [{protocol: TCP, port: 8080}]

@@ -1,0 +1,576 @@
+{
+  "customer_validation": false,
+  "data_classification": "generated_demo_not_customer_validation",
+  "dataset_id": "generated-warranty-hours-v1",
+  "frozen_program": {
+    "condition": {
+      "left": {
+        "op": "field",
+        "path": "hours"
+      },
+      "op": "compare",
+      "operator": "le",
+      "right": {
+        "op": "literal",
+        "value": 1950.0
+      }
+    },
+    "else": {
+      "op": "literal",
+      "value": false
+    },
+    "op": "if",
+    "then": {
+      "op": "literal",
+      "value": true
+    }
+  },
+  "inner_validation_error": 0.0,
+  "latency_caveat": "single-run harness duration includes native overhead and is not a throughput/service benchmark",
+  "locked_test_results": [
+    {
+      "baseline": "majority_constant",
+      "execution_us": 1,
+      "metrics": {
+        "accuracy": 0.5,
+        "brier": 0.5,
+        "calibration_bins": [
+          {
+            "index": 0,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 1,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 2,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 3,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 4,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 5,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 6,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 7,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 8,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 9,
+            "mean_probability": 1.0,
+            "n": 8,
+            "positive_rate": 0.5
+          }
+        ],
+        "ece": 0.5,
+        "interval_assumption": "independent Bernoulli observations; clustered cases require a cluster-aware analysis",
+        "log_loss": 17.26978799617044,
+        "mce": 0.5,
+        "production_gate_passed": false,
+        "sample_count": 8,
+        "selective_risk": [
+          {
+            "coverage": 1.0,
+            "errors": 4,
+            "risk": 0.5,
+            "risk_wilson_95": [
+              0.21521606221387757,
+              0.7847839377861224
+            ],
+            "selected": 8,
+            "threshold": 0.5,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          },
+          {
+            "coverage": 1.0,
+            "errors": 4,
+            "risk": 0.5,
+            "risk_wilson_95": [
+              0.21521606221387757,
+              0.7847839377861224
+            ],
+            "selected": 8,
+            "threshold": 0.99,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          }
+        ]
+      },
+      "probability_semantics": "hard class indicators; not calibrated confidence estimates"
+    },
+    {
+      "baseline": "bm25_nearest_labeled_message",
+      "execution_us": 410,
+      "metrics": {
+        "accuracy": 0.5,
+        "brier": 0.5,
+        "calibration_bins": [
+          {
+            "index": 0,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 1,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 2,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 3,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 4,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 5,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 6,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 7,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 8,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 9,
+            "mean_probability": 1.0,
+            "n": 8,
+            "positive_rate": 0.5
+          }
+        ],
+        "ece": 0.5,
+        "interval_assumption": "independent Bernoulli observations; clustered cases require a cluster-aware analysis",
+        "log_loss": 17.26978799617044,
+        "mce": 0.5,
+        "production_gate_passed": false,
+        "sample_count": 8,
+        "selective_risk": [
+          {
+            "coverage": 1.0,
+            "errors": 4,
+            "risk": 0.5,
+            "risk_wilson_95": [
+              0.21521606221387757,
+              0.7847839377861224
+            ],
+            "selected": 8,
+            "threshold": 0.5,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          },
+          {
+            "coverage": 1.0,
+            "errors": 4,
+            "risk": 0.5,
+            "risk_wilson_95": [
+              0.21521606221387757,
+              0.7847839377861224
+            ],
+            "selected": 8,
+            "threshold": 0.99,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          }
+        ]
+      },
+      "probability_semantics": "hard class indicators; not calibrated confidence estimates"
+    },
+    {
+      "baseline": "numeric_one_nearest_case",
+      "execution_us": 42,
+      "metrics": {
+        "accuracy": 0.75,
+        "brier": 0.25,
+        "calibration_bins": [
+          {
+            "index": 0,
+            "mean_probability": 0.0,
+            "n": 6,
+            "positive_rate": 0.3333333333333333
+          },
+          {
+            "index": 1,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 2,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 3,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 4,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 5,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 6,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 7,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 8,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 9,
+            "mean_probability": 1.0,
+            "n": 2,
+            "positive_rate": 1.0
+          }
+        ],
+        "ece": 0.25,
+        "interval_assumption": "independent Bernoulli observations; clustered cases require a cluster-aware analysis",
+        "log_loss": 8.634694098727671,
+        "mce": 0.3333333333333333,
+        "production_gate_passed": false,
+        "sample_count": 8,
+        "selective_risk": [
+          {
+            "coverage": 1.0,
+            "errors": 2,
+            "risk": 0.25,
+            "risk_wilson_95": [
+              0.071479212752109,
+              0.5907245696898311
+            ],
+            "selected": 8,
+            "threshold": 0.5,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          },
+          {
+            "coverage": 1.0,
+            "errors": 2,
+            "risk": 0.25,
+            "risk_wilson_95": [
+              0.071479212752109,
+              0.5907245696898311
+            ],
+            "selected": 8,
+            "threshold": 0.99,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          }
+        ]
+      },
+      "probability_semantics": "hard class indicators; not calibrated confidence estimates"
+    },
+    {
+      "baseline": "explicit_approved_generated_policy",
+      "execution_us": 95,
+      "metrics": {
+        "accuracy": 1.0,
+        "brier": 0.0,
+        "calibration_bins": [
+          {
+            "index": 0,
+            "mean_probability": 0.0,
+            "n": 4,
+            "positive_rate": 0.0
+          },
+          {
+            "index": 1,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 2,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 3,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 4,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 5,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 6,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 7,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 8,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 9,
+            "mean_probability": 1.0,
+            "n": 4,
+            "positive_rate": 1.0
+          }
+        ],
+        "ece": 0.0,
+        "interval_assumption": "independent Bernoulli observations; clustered cases require a cluster-aware analysis",
+        "log_loss": 9.992007221626415e-16,
+        "mce": 0.0,
+        "production_gate_passed": false,
+        "sample_count": 8,
+        "selective_risk": [
+          {
+            "coverage": 1.0,
+            "errors": 0,
+            "risk": 0.0,
+            "risk_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ],
+            "selected": 8,
+            "threshold": 0.5,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": 0.31234397806636793
+          },
+          {
+            "coverage": 1.0,
+            "errors": 0,
+            "risk": 0.0,
+            "risk_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ],
+            "selected": 8,
+            "threshold": 0.99,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": 0.31234397806636793
+          }
+        ]
+      },
+      "probability_semantics": "hard class indicators; not calibrated confidence estimates"
+    },
+    {
+      "baseline": "induced_program",
+      "execution_us": 142,
+      "metrics": {
+        "accuracy": 0.75,
+        "brier": 0.25,
+        "calibration_bins": [
+          {
+            "index": 0,
+            "mean_probability": 0.0,
+            "n": 6,
+            "positive_rate": 0.3333333333333333
+          },
+          {
+            "index": 1,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 2,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 3,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 4,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 5,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 6,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 7,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 8,
+            "mean_probability": null,
+            "n": 0,
+            "positive_rate": null
+          },
+          {
+            "index": 9,
+            "mean_probability": 1.0,
+            "n": 2,
+            "positive_rate": 1.0
+          }
+        ],
+        "ece": 0.25,
+        "interval_assumption": "independent Bernoulli observations; clustered cases require a cluster-aware analysis",
+        "log_loss": 8.634694098727671,
+        "mce": 0.3333333333333333,
+        "production_gate_passed": false,
+        "sample_count": 8,
+        "selective_risk": [
+          {
+            "coverage": 1.0,
+            "errors": 2,
+            "risk": 0.25,
+            "risk_wilson_95": [
+              0.071479212752109,
+              0.5907245696898311
+            ],
+            "selected": 8,
+            "threshold": 0.5,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          },
+          {
+            "coverage": 1.0,
+            "errors": 2,
+            "risk": 0.25,
+            "risk_wilson_95": [
+              0.071479212752109,
+              0.5907245696898311
+            ],
+            "selected": 8,
+            "threshold": 0.99,
+            "zero_error_alpha": 0.05,
+            "zero_error_one_sided_upper": null
+          }
+        ]
+      },
+      "probability_semantics": "hard class indicators; not calibrated confidence estimates"
+    }
+  ],
+  "production_gate_passed": false,
+  "sample_count": 8,
+  "scope": "actual CPU evaluation on small generated binary-hours exercise; not full warranty workflow, causal transfer evidence or LLM superiority",
+  "split_integrity": {
+    "counts": {
+      "calibration": 4,
+      "locked_transfer_test": 8,
+      "train": 12,
+      "validation": 4
+    },
+    "errors": [],
+    "group_keys": [
+      "source_family"
+    ],
+    "locked_transfer_test_present": true,
+    "scope": "detects declared id/content/group/time leakage; does not detect paraphrase leakage, hidden training contamination or certify real customer representativeness",
+    "test_content_returned": false,
+    "valid": true
+  }
+}

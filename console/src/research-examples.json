@@ -1,0 +1,493 @@
+{
+  "data_classification": "generated_demo_not_customer_validation",
+  "calibration.fit": {
+    "method": "platt",
+    "split": "calibration",
+    "predictions": [
+      0.1,
+      0.2,
+      0.7,
+      0.9
+    ],
+    "labels": [
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "calibration.predict": {
+    "calibrator": {
+      "method": "platt",
+      "a": 1.0,
+      "b": 0.0
+    },
+    "predictions": [
+      0.1,
+      0.9
+    ]
+  },
+  "evaluation.metrics": {
+    "predictions": [
+      0.1,
+      0.9,
+      0.8,
+      0.4
+    ],
+    "labels": [
+      0,
+      1,
+      1,
+      0
+    ],
+    "bins": 5,
+    "thresholds": [
+      0.5,
+      0.9
+    ]
+  },
+  "drift.evaluate": {
+    "reference": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+    ],
+    "current": [
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "bins": 5
+  },
+  "conformal.fit": {
+    "split": "calibration",
+    "predictions": [
+      0.1,
+      0.2,
+      0.7,
+      0.9
+    ],
+    "labels": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "alpha": 0.2
+  },
+  "conformal.predict": {
+    "conformal": {
+      "method": "binary_split_conformal",
+      "quantile": 0.3,
+      "alpha": 0.2,
+      "calibration_count": 4
+    },
+    "predictions": [
+      0.1,
+      0.9,
+      0.5
+    ]
+  },
+  "bandit.select": {
+    "context_id": "generated-support-demo",
+    "policy_version": "1.0.0",
+    "method": "epsilon_greedy",
+    "epsilon": 0.1,
+    "seed": 42,
+    "arms": [
+      {
+        "id": "clarify",
+        "risk": "low",
+        "successes": 8,
+        "failures": 2
+      },
+      {
+        "id": "summarize",
+        "risk": "low",
+        "successes": 2,
+        "failures": 8
+      }
+    ]
+  },
+  "bandit.update": {
+    "context_id": "generated-support-demo",
+    "action_id": "clarify",
+    "outcome_id": "outcome-1",
+    "verified_outcome": true,
+    "consent": true,
+    "decision_policy_version": "1.0.0",
+    "current_policy_version": "1.0.0",
+    "reward": 1,
+    "seen_outcome_ids": [],
+    "arms": [
+      {
+        "id": "clarify",
+        "risk": "low",
+        "successes": 8,
+        "failures": 2
+      }
+    ]
+  },
+  "feedback.validate": {
+    "policy_version": "1",
+    "candidate": {
+      "kind": "response_strategy"
+    },
+    "min_independent_actors": 3,
+    "events": [
+      {
+        "id": "1",
+        "actor_id": "a",
+        "source_family": "f1",
+        "authorized": true,
+        "consent": true,
+        "policy_version": "1",
+        "reward": 1
+      },
+      {
+        "id": "2",
+        "actor_id": "b",
+        "source_family": "f2",
+        "authorized": true,
+        "consent": true,
+        "policy_version": "1",
+        "reward": 1
+      },
+      {
+        "id": "3",
+        "actor_id": "c",
+        "source_family": "f3",
+        "authorized": true,
+        "consent": true,
+        "policy_version": "1",
+        "reward": 1
+      }
+    ]
+  },
+  "dsl.execute": {
+    "program": {
+      "op": "convert",
+      "from": "F",
+      "to": "C",
+      "value": {
+        "op": "field",
+        "path": "temperature"
+      }
+    },
+    "data": {
+      "temperature": 104
+    }
+  },
+  "synthesis.search": {
+    "train": [
+      {
+        "id": "1",
+        "x": {
+          "hours": 100
+        },
+        "y": true
+      },
+      {
+        "id": "2",
+        "x": {
+          "hours": 300
+        },
+        "y": true
+      },
+      {
+        "id": "3",
+        "x": {
+          "hours": 2500
+        },
+        "y": false
+      },
+      {
+        "id": "4",
+        "x": {
+          "hours": 3000
+        },
+        "y": false
+      }
+    ],
+    "validation": [
+      {
+        "id": "5",
+        "x": {
+          "hours": 500
+        },
+        "y": true
+      },
+      {
+        "id": "6",
+        "x": {
+          "hours": 2800
+        },
+        "y": false
+      }
+    ],
+    "max_candidates": 64
+  },
+  "sequence.build": {
+    "documents": [
+      {
+        "id": "generated-source-1",
+        "revision": "1",
+        "license": "Apache-2.0",
+        "content": "service record warranty expires"
+      },
+      {
+        "id": "generated-source-2",
+        "revision": "1",
+        "license": "Apache-2.0",
+        "content": "service record complete"
+      }
+    ]
+  },
+  "semantic.ppmi": {
+    "documents": [
+      "pump hydraulic pressure oil",
+      "pump service oil pressure",
+      "engine coolant temperature service"
+    ],
+    "window": 2,
+    "max_vocabulary": 16
+  },
+  "semantic.lsa": {
+    "matrix": [
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        2,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        3
+      ]
+    ],
+    "rank": 2
+  },
+  "semantic.signature": {
+    "content": "The service record identifies a pump fault.",
+    "shingle_size": 2,
+    "permutations": 32
+  },
+  "semantic.similarity": {
+    "kind": "cosine",
+    "left": [
+      1,
+      2,
+      3
+    ],
+    "right": [
+      1,
+      2,
+      3
+    ]
+  },
+  "ingestion.extract": {
+    "format": "csv",
+    "source_id": "generated-source",
+    "revision": "1",
+    "license": "Apache-2.0",
+    "content": "serial,hours\n1200,1000\n1600,2500\n"
+  },
+  "pack.validate": {
+    "pack": {
+      "id": "generated-demo",
+      "version": "1.0.0",
+      "language": "en",
+      "license": "Apache-2.0",
+      "licenses": [
+        {
+          "license": "Apache-2.0",
+          "permitted": true
+        }
+      ],
+      "manifest": {
+        "format_version": 1,
+        "data_classification": "generated_demo_not_customer_validation"
+      },
+      "data_classification": "generated_demo_not_customer_validation",
+      "limits": {
+        "max_rule_conditions": 100
+      },
+      "ontology": {},
+      "tasks": [
+        {
+          "id": "eligible",
+          "type": "boolean",
+          "condition": {
+            "field": "hours",
+            "op": "le",
+            "value": 2000
+          }
+        }
+      ],
+      "rules": [],
+      "responses": {
+        "eligible": [
+          "The approved structured result is available."
+        ]
+      },
+      "workflows": {}
+    }
+  },
+  "bundle.validate": {
+    "now": 100,
+    "manifest": {
+      "id": "generated-demo",
+      "version": "1.0.0",
+      "issuer": "local-example",
+      "purpose": "research",
+      "format_version": 1,
+      "created_at": 90,
+      "expires_at": 200,
+      "artifacts": [
+        {
+          "path": "example.txt",
+          "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+          "license": "Apache-2.0",
+          "permitted": true
+        }
+      ]
+    },
+    "artifacts": [
+      {
+        "path": "example.txt",
+        "content": "abc"
+      }
+    ]
+  },
+  "evaluation.splits": {
+    "group_keys": [
+      "source_family"
+    ],
+    "time_ordered": true,
+    "partitions": {
+      "train": [
+        {
+          "id": "a",
+          "source_family": "train-family",
+          "event_time": 1,
+          "x": {
+            "hours": 100
+          }
+        }
+      ],
+      "validation": [
+        {
+          "id": "b",
+          "source_family": "validation-family",
+          "event_time": 2,
+          "x": {
+            "hours": 500
+          }
+        }
+      ],
+      "calibration": [
+        {
+          "id": "c",
+          "source_family": "calibration-family",
+          "event_time": 3,
+          "x": {
+            "hours": 1200
+          }
+        }
+      ],
+      "locked_transfer_test": [
+        {
+          "id": "d",
+          "source_family": "test-family",
+          "event_time": 4,
+          "x": {
+            "hours": 2500
+          }
+        }
+      ]
+    }
+  },
+  "causal.analyze": {
+    "design": "backdoor_adjustment",
+    "treatment": "treated",
+    "outcome": "outcome",
+    "adjustment": [
+      "group"
+    ],
+    "assumptions": {
+      "consistency": true,
+      "exchangeability": true,
+      "positivity": true
+    },
+    "sensitivity_bias": 1,
+    "rows": [
+      {
+        "treated": false,
+        "outcome": 2,
+        "group": "generated"
+      },
+      {
+        "treated": true,
+        "outcome": 7,
+        "group": "generated"
+      },
+      {
+        "treated": false,
+        "outcome": 2,
+        "group": "generated"
+      },
+      {
+        "treated": true,
+        "outcome": 7,
+        "group": "generated"
+      },
+      {
+        "treated": false,
+        "outcome": 2,
+        "group": "generated"
+      },
+      {
+        "treated": true,
+        "outcome": 7,
+        "group": "generated"
+      },
+      {
+        "treated": false,
+        "outcome": 2,
+        "group": "generated"
+      },
+      {
+        "treated": true,
+        "outcome": 7,
+        "group": "generated"
+      },
+      {
+        "treated": false,
+        "outcome": 2,
+        "group": "generated"
+      },
+      {
+        "treated": true,
+        "outcome": 7,
+        "group": "generated"
+      },
+      {
+        "treated": false,
+        "outcome": 2,
+        "group": "generated"
+      },
+      {
+        "treated": true,
+        "outcome": 7,
+        "group": "generated"
+      }
+    ]
+  }
+}

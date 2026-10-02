@@ -1,0 +1,43 @@
+{
+  "dataset_id": "generated-warranty-hours-v1",
+  "data_classification": "generated_demo_not_customer_validation",
+  "task": "generated exercise: operating hours at or below 2000; ignores all other real eligibility evidence",
+  "partitions": {
+    "train": [
+      {"id":"tr1","source_family":"tr1","event_time":1,"x":{"hours":200,"message":"review warranty service entitlement"},"y":true},
+      {"id":"tr2","source_family":"tr2","event_time":2,"x":{"hours":400,"message":"check service entitlement request"},"y":true},
+      {"id":"tr3","source_family":"tr3","event_time":3,"x":{"hours":700,"message":"warranty evidence available"},"y":true},
+      {"id":"tr4","source_family":"tr4","event_time":4,"x":{"hours":1000,"message":"please review warranty"},"y":true},
+      {"id":"tr5","source_family":"tr5","event_time":5,"x":{"hours":1400,"message":"review service entitlement"},"y":true},
+      {"id":"tr6","source_family":"tr6","event_time":6,"x":{"hours":1700,"message":"check warranty request"},"y":true},
+      {"id":"tr7","source_family":"tr7","event_time":7,"x":{"hours":2200,"message":"review warranty service entitlement"},"y":false},
+      {"id":"tr8","source_family":"tr8","event_time":8,"x":{"hours":2500,"message":"check service entitlement request"},"y":false},
+      {"id":"tr9","source_family":"tr9","event_time":9,"x":{"hours":2700,"message":"warranty evidence available"},"y":false},
+      {"id":"tr10","source_family":"tr10","event_time":10,"x":{"hours":3000,"message":"please review warranty"},"y":false},
+      {"id":"tr11","source_family":"tr11","event_time":11,"x":{"hours":3400,"message":"review service entitlement"},"y":false},
+      {"id":"tr12","source_family":"tr12","event_time":12,"x":{"hours":3800,"message":"check warranty request"},"y":false}
+    ],
+    "validation": [
+      {"id":"v1","source_family":"v1","event_time":20,"x":{"hours":1500,"message":"review request"},"y":true},
+      {"id":"v2","source_family":"v2","event_time":21,"x":{"hours":1900,"message":"warranty status"},"y":true},
+      {"id":"v3","source_family":"v3","event_time":22,"x":{"hours":2100,"message":"service entitlement status"},"y":false},
+      {"id":"v4","source_family":"v4","event_time":23,"x":{"hours":2600,"message":"check request status"},"y":false}
+    ],
+    "calibration": [
+      {"id":"c1","source_family":"c1","event_time":30,"x":{"hours":800,"message":"check service record"},"y":true},
+      {"id":"c2","source_family":"c2","event_time":31,"x":{"hours":1600,"message":"please check coverage"},"y":true},
+      {"id":"c3","source_family":"c3","event_time":32,"x":{"hours":2300,"message":"check coverage record"},"y":false},
+      {"id":"c4","source_family":"c4","event_time":33,"x":{"hours":3600,"message":"please check service"},"y":false}
+    ],
+    "locked_transfer_test": [
+      {"id":"t1","source_family":"t1","event_time":40,"x":{"hours":600,"message":"review service request"},"y":true},
+      {"id":"t2","source_family":"t2","event_time":41,"x":{"hours":1800,"message":"check entitlement status"},"y":true},
+      {"id":"t3","source_family":"t3","event_time":42,"x":{"hours":1990,"message":"warranty check please"},"y":true},
+      {"id":"t4","source_family":"t4","event_time":43,"x":{"hours":2000,"message":"review warranty service entitlement"},"y":true},
+      {"id":"t5","source_family":"t5","event_time":44,"x":{"hours":2050,"message":"warranty check please"},"y":false},
+      {"id":"t6","source_family":"t6","event_time":45,"x":{"hours":2400,"message":"check entitlement status"},"y":false},
+      {"id":"t7","source_family":"t7","event_time":46,"x":{"hours":3300,"message":"review service request"},"y":false},
+      {"id":"t8","source_family":"t8","event_time":47,"x":{"hours":3900,"message":"review warranty service entitlement"},"y":false}
+    ]
+  }
+}

@@ -1,0 +1,141 @@
+   Compiling sami-research v0.2.0 (<extracted-source>/crates/sami-research)
+   Compiling sami-intelligence v0.2.0 (<extracted-source>/crates/sami-intelligence)
+   Compiling sami v0.2.0 (<extracted-source>)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.31s
+     Running unittests src/lib.rs (<build-cache-root>/target/debug/deps/sami-b06ad660ee1f2ee0)
+
+running 4 tests
+test actions::tests::schemas_reject_unapproved_fields ... ok
+test crypto::tests::device_keys_separate_tenants_devices_and_master_key ... ok
+test crypto::tests::authenticated_scope_and_signatures ... ok
+test storage::tests::isolation_cas_and_atomic_epoch ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/main.rs (<build-cache-root>/target/debug/deps/sami-48f843f43d475d7e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres.rs (<build-cache-root>/target/debug/deps/postgres-d415652f43702101)
+
+running 1 test
+test postgres_transactions_evidence_receipts_actions_and_repair ... ignored, requires SAMI_TEST_POSTGRES_URL pointing at an isolated empty database
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/runtime.rs (<build-cache-root>/target/debug/deps/runtime-c0d1c680ef9892a5)
+
+running 14 tests
+test internal_addresses_include_mapped_ipv6_and_reserved_ranges ... ok
+test concurrent_state_update_and_revocation_are_fenced ... ok
+test private_pack_and_workflow_are_not_exposed_by_invoke_or_export_scope ... ok
+test durable_planned_workflow_requires_exact_confirmation_and_cas ... ok
+test offline_bundle_checks_scope_integrity_lease_and_device ... ok
+test workflow_already_at_goal_completes_and_unreachable_goal_is_rejected ... ok
+test encrypted_backup_restore_applies_newer_tombstones_before_serving ... ok
+test stale_permissions_are_not_searchable_and_injections_are_data ... ok
+test acl_tenant_search_and_receipt_are_isolated ... ok
+test deletion_purges_replay_payload_and_prevents_resurrection ... ok
+test bundle_import_uses_device_secret_and_public_trust_without_issuer_private_keys ... ok
+test decision_receipt_replay_and_idempotent_atomic_ticket ... ok
+test correction_blocks_queued_action_and_keeps_historical_replay ... ok
+test response_session_state_survives_turns_and_rejects_stale_revision ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+
+     Running unittests src/lib.rs (<build-cache-root>/target/debug/deps/sami_intelligence-d0598a39ebe5367a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/native_contract.rs (<build-cache-root>/target/debug/deps/native_contract-05009326397b48fb)
+
+running 20 tests
+test dimensional_comparisons_remain_unknown_and_higher_priority_resolves_preferences ... ok
+test equal_priority_rule_conflicts_and_authority_mutations_are_rejected ... ok
+test graph_cycles_are_bounded_and_unapproved_relations_do_not_enter_paths ... ok
+test planner_finds_lowest_cost_bounded_path_without_executing_tools ... ok
+test rules_deny_overrides_allow_and_unknown_is_not_false ... ok
+test search_exposes_rank_components_and_recovers_approved_aliases ... ok
+test roleplay_reveals_one_fact_and_does_not_postpone_or_expose_hidden_state ... ok
+test grammar_protects_slots_and_varies_only_approved_wording ... ok
+test api_shape_routes_supported_service_and_never_authorizes_effect ... ok
+test conflicting_applicable_bulletins_are_not_resolved_by_input_order ... ok
+test wrong_serial_and_unconfirmed_hours_cannot_overwrite_approved_records ... ok
+test missing_records_do_not_become_a_warranty_denial ... ok
+test unsupported_language_and_partial_ranking_do_not_create_false_certainty ... ok
+test bitemporal_claims_and_missing_or_cyclic_parents_fail_closed ... ok
+test duplicate_sources_do_not_create_confidence_and_conflicts_are_retained ... ok
+test unit_conversion_and_out_of_scope_policy_are_checked ... ok
+test warranty_calendar_and_hours_boundaries_are_explicit_and_human_reviewed ... ok
+test source_revision_retraction_or_expiry_invalidates_operational_evidence ... ok
+test parser_preserves_negation_entity_and_time_ambiguity ... ok
+test every_registered_typed_decision_has_an_executable_contract ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.78s
+
+     Running unittests src/lib.rs (<build-cache-root>/target/debug/deps/sami_research-137e290e7d153749)
+
+running 29 tests
+test ingestion::tests::unsupported_pdf_fails_explicitly ... ok
+test calibration::tests::locked_test_cannot_be_fitted ... ok
+test calibration::tests::drift_detects_shift_and_identical_samples_are_zero ... ok
+test calibration::tests::conformal_small_sample_does_not_overclaim ... ok
+test calibration::tests::pav_merges_violations_and_equal_scores ... ok
+test calibration::tests::exact_metrics_and_zero_failure_bound ... ok
+test program::tests::conversion_checks_dimensions_and_temperature ... ok
+test learning::tests::expensive_actions_are_rejected ... ok
+test ingestion::tests::malformed_csv_does_not_partial_publish ... ok
+test learning::tests::duplicate_rewards_and_stale_policies_are_rejected ... ok
+test learning::tests::exact_epsilon_greedy_distribution ... ok
+test causal::tests::overlap_and_assumptions_are_explicit ... ok
+test program::tests::joins_and_arbitrary_code_are_bounded ... ok
+test program::tests::filter_projection_and_join_execute_without_io ... ok
+test semantic::tests::ppmi_never_counts_cross_document_context ... ok
+test ingestion::tests::quoted_csv_rows_and_json_pointer_are_preserved ... ok
+test program::tests::overlap_is_rejected ... ok
+test semantic::tests::zero_norm_cosine_is_unknown ... ok
+test semantic::tests::lsa_reconstructs_a_rank_one_matrix ... ok
+test tests::closed_dispatch_rejects_unknown_and_non_objects ... ok
+test ingestion::tests::html_source_code_and_embedded_commands_are_inert ... ok
+test validation::tests::typed_pack_validation_reports_errors_without_promotion ... ok
+test validation::tests::split_family_overlap_is_rejected ... ok
+test validation::tests::expiry_checksum_and_path_traversal_are_enforced ... ok
+test sequence::tests::corrupt_or_unsorted_index_fails_closed ... ok
+test sequence::tests::suffix_search_stays_inside_source_documents ... ok
+test learning::tests::bandits_reproducible_and_propensity_is_recorded ... ok
+test semantic::tests::duplicate_signatures_have_full_agreement ... ok
+test program::tests::induction_uses_inner_validation_and_rejects_transfer_access ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/operation_contracts.rs (<build-cache-root>/target/debug/deps/operation_contracts-d79b1e071eb2d759)
+
+running 3 tests
+test fitted_and_built_artifacts_work_as_followup_inputs ... ok
+test every_published_lab_example_executes ... ok
+test materialization_budget_rejects_copy_amplification ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+   Doc-tests sami
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests sami_intelligence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests sami_research
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

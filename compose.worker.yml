@@ -1,0 +1,20 @@
+# Supply a dedicated least-privilege SAMI_WORKER_KEY, never the bootstrap key.
+services:
+  worker:
+    image: sami-api:local
+    command: [worker, --interval-seconds, '10']
+    environment:
+      SAMI_DATABASE_URL: postgres://sami:${SAMI_POSTGRES_PASSWORD}@database:5432/sami
+      SAMI_ENCRYPTION_KEY: ${SAMI_ENCRYPTION_KEY}
+      SAMI_SIGNING_KEY: ${SAMI_SIGNING_KEY}
+      SAMI_WORKER_KEY: ${SAMI_WORKER_KEY:?Provision a scoped worker key}
+      SAMI_ENV: production
+      SAMI_DATA_DIR: /var/lib/sami
+      SAMI_CONNECTOR_HOSTS: ${SAMI_CONNECTOR_HOSTS:-}
+    depends_on: {api: {condition: service_healthy}}
+    networks: [backend, frontend]
+    volumes: [sami-data:/var/lib/sami]
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]

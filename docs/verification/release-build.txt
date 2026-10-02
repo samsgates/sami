@@ -1,0 +1,2 @@
+   Compiling sami v0.2.0 (<source-root>)
+    Finished `release` profile [optimized] target(s) in 21.80s

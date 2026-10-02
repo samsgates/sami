@@ -1,0 +1,501 @@
+{
+  "id": "industrial-service",
+  "version": "1.0.0",
+  "language": "en",
+  "data_classification": "generated_demo_not_customer_validation",
+  "limits": {
+    "max_message_bytes": 65536,
+    "max_rule_conditions": 1000,
+    "max_graph_hops": 3,
+    "max_planner_nodes": 100
+  },
+  "ontology": {
+    "intents": [
+      {
+        "id": "service_triage",
+        "concepts": [
+          "issue.overheating",
+          "issue.fluid_leak",
+          "issue.no_start",
+          "issue.safety"
+        ]
+      },
+      {
+        "id": "warranty_prequalification",
+        "concepts": [
+          "intent.warranty"
+        ]
+      },
+      {
+        "id": "correction",
+        "concepts": [
+          "intent.correction"
+        ]
+      }
+    ],
+    "concepts": [
+      {
+        "id": "issue.overheating",
+        "phrases": [
+          "overheating",
+          "overheated",
+          "running hot",
+          "temperature warning"
+        ]
+      },
+      {
+        "id": "issue.fluid_leak",
+        "phrases": [
+          "oil leak",
+          "hydraulic leak",
+          "leaking oil",
+          "leaking fluid"
+        ]
+      },
+      {
+        "id": "issue.no_start",
+        "phrases": [
+          "will not start",
+          "does not start",
+          "no start",
+          "starter failure"
+        ]
+      },
+      {
+        "id": "issue.safety",
+        "phrases": [
+          "fire",
+          "smoke",
+          "injury",
+          "safety concern"
+        ]
+      },
+      {
+        "id": "intent.warranty",
+        "phrases": [
+          "warranty",
+          "entitlement",
+          "coverage"
+        ]
+      },
+      {
+        "id": "intent.correction",
+        "phrases": [
+          "correct the record",
+          "correction",
+          "wrong serial"
+        ]
+      },
+      {
+        "id": "objection.financial",
+        "phrases": [
+          "expensive",
+          "cost too much",
+          "too costly",
+          "cannot afford"
+        ]
+      }
+    ]
+  },
+  "assets": [
+    {
+      "id": "asset:unit_42",
+      "serial_number": "1200",
+      "year": 2023,
+      "product": "PX320",
+      "jurisdiction": "IN",
+      "aliases": [
+        "2023 unit",
+        "old excavator",
+        "unit 42"
+      ]
+    },
+    {
+      "id": "asset:unit_84",
+      "serial_number": "1600",
+      "year": 2025,
+      "product": "PX320",
+      "jurisdiction": "IN",
+      "aliases": [
+        "2025 unit",
+        "new excavator",
+        "unit 84"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "service_triage",
+      "type": "service_triage",
+      "required_claims": [
+        "serial_number",
+        "product"
+      ],
+      "routes": [
+        {
+          "issue": "issue.overheating",
+          "queue": "thermal_service_team",
+          "bulletin_required": true
+        },
+        {
+          "issue": "issue.fluid_leak",
+          "queue": "hydraulics_service_team",
+          "bulletin_required": true
+        },
+        {
+          "issue": "issue.no_start",
+          "queue": "electrical_service_team",
+          "bulletin_required": false
+        },
+        {
+          "issue": "issue.safety",
+          "queue": "safety_response_team",
+          "bulletin_required": false
+        }
+      ]
+    },
+    {
+      "id": "warranty_prequalification",
+      "type": "warranty_prequalification",
+      "required_claims": [
+        "serial_number",
+        "product",
+        "in_service_date",
+        "operating_hours",
+        "proof_of_service",
+        "jurisdiction"
+      ],
+      "policy": {
+        "max_months": 24,
+        "max_operating_hours": 2000,
+        "expiry_semantics": "exclusive_calendar_date",
+        "operating_hours_semantics": "inclusive",
+        "jurisdiction": "IN",
+        "authority": "approved_domain_pack_demo_policy",
+        "product": "PX320"
+      }
+    },
+    {
+      "id": "financial_objection",
+      "type": "boolean",
+      "required_fields": [],
+      "condition": {
+        "field": "concepts",
+        "op": "contains",
+        "value": "objection.financial"
+      },
+      "requires_interpretation": true
+    },
+    {
+      "id": "objection_type",
+      "type": "choice",
+      "required_fields": [
+        "objection"
+      ],
+      "candidates": [
+        {
+          "value": "financial",
+          "when": {
+            "field": "objection",
+            "op": "eq",
+            "value": "financial"
+          }
+        },
+        {
+          "value": "technical",
+          "when": {
+            "field": "objection",
+            "op": "eq",
+            "value": "technical"
+          }
+        },
+        {
+          "value": "none",
+          "when": {
+            "field": "objection",
+            "op": "eq",
+            "value": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "case_flags",
+      "type": "multi_choice",
+      "required_fields": [
+        "urgent",
+        "documents_missing"
+      ],
+      "candidates": [
+        {
+          "value": "urgent",
+          "when": {
+            "field": "urgent",
+            "op": "eq",
+            "value": true
+          }
+        },
+        {
+          "value": "missing_document",
+          "when": {
+            "field": "documents_missing",
+            "op": "eq",
+            "value": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "simulation_readiness",
+      "type": "score",
+      "field": "readiness",
+      "required_fields": [
+        "readiness"
+      ],
+      "min": 0,
+      "max": 100,
+      "unit": "simulation_points",
+      "scope": "explicit_simulation_only"
+    },
+    {
+      "id": "next_step_rank",
+      "type": "rank",
+      "candidates": [
+        {
+          "value": "clarify",
+          "base_score": 1,
+          "terms": [
+            {
+              "when": {
+                "field": "documents_missing",
+                "op": "eq",
+                "value": true
+              },
+              "weight": 3
+            }
+          ]
+        },
+        {
+          "value": "prepare_case",
+          "base_score": 2,
+          "when": {
+            "field": "documents_missing",
+            "op": "eq",
+            "value": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "extract_case_fields",
+      "type": "extract",
+      "fields": [
+        "serial_number",
+        "operating_hours"
+      ]
+    },
+    {
+      "id": "next_action",
+      "type": "action",
+      "required_fields": [
+        "documents_missing"
+      ],
+      "candidates": [
+        {
+          "value": "ask_for_document",
+          "when": {
+            "field": "documents_missing",
+            "op": "eq",
+            "value": true
+          }
+        },
+        {
+          "value": "prepare_case",
+          "when": {
+            "field": "documents_missing",
+            "op": "eq",
+            "value": false
+          }
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "deny_financial_or_physical_effect",
+      "priority": 1000,
+      "effect": "deny",
+      "when": {
+        "field": "action",
+        "op": "in",
+        "value": [
+          "pay_warranty",
+          "refund",
+          "actuate_machine",
+          "hazardous_repair"
+        ]
+      }
+    },
+    {
+      "id": "safety_case_human_review",
+      "priority": 900,
+      "effect": "require_review",
+      "when": {
+        "field": "issue",
+        "op": "eq",
+        "value": "issue.safety"
+      }
+    },
+    {
+      "id": "demo_office_scope",
+      "priority": 100,
+      "effect": "allow",
+      "when": {
+        "field": "action",
+        "op": "in",
+        "value": [
+          "prepare_case",
+          "recommend_route",
+          "propose_ticket"
+        ]
+      }
+    }
+  ],
+  "responses": {
+    "service_route": [
+      "For {asset_id}, the approved information supports routing this case to {queue}. This is a service routing recommendation; a qualified specialist determines the fault.",
+      "Route the case for {asset_id} to {queue} using the cited applicable information. A specialist must confirm the mechanical diagnosis."
+    ],
+    "warranty_prequalification": [
+      "For {asset_id}, the prequalification is {conclusion}. The calendar policy expires on {expiry_date}; the warranty owner must make the final coverage decision."
+    ],
+    "missing_evidence": [
+      "I need these approved records before completing the check: {missing}. Please confirm or obtain them from the authorized source."
+    ],
+    "conflicting_evidence": [
+      "Approved records disagree. An authorized reviewer must resolve the conflict before this decision can proceed."
+    ],
+    "clarify_issue": [
+      "Which single issue should this case address? Please confirm the affected asset and symptom before routing it."
+    ],
+    "unsupported": [
+      "This request is outside the approved native workflow. I can help identify an asset, prepare a service case, or collect warranty evidence."
+    ],
+    "policy_denied": [
+      "The requested action is not permitted by the current workflow policy. An authorized specialist can review the supported next step."
+    ],
+    "decision_result": [
+      "The registered task returned {result}. This deterministic result does not authorize an external action."
+    ]
+  },
+  "workflows": {
+    "service_case": {
+      "goals": {
+        "case_prepared": {
+          "field": "case.status",
+          "op": "eq",
+          "value": "prepared"
+        }
+      },
+      "actions": [
+        {
+          "id": "identify_asset",
+          "preconditions": {
+            "field": "asset_confirmed",
+            "op": "eq",
+            "value": false
+          },
+          "effects": {
+            "asset_confirmed": true
+          },
+          "cost": 1
+        },
+        {
+          "id": "collect_evidence",
+          "preconditions": {
+            "field": "asset_confirmed",
+            "op": "eq",
+            "value": true
+          },
+          "effects": {
+            "evidence_complete": true
+          },
+          "cost": 2
+        },
+        {
+          "id": "prepare_case",
+          "preconditions": {
+            "all": [
+              {
+                "field": "asset_confirmed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "evidence_complete",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "effects": {
+            "case.status": "prepared"
+          },
+          "cost": 1
+        }
+      ]
+    }
+  },
+  "roleplay_persona": {
+    "name": "Mining Operations Manager",
+    "simulation": true,
+    "initial_trust": 0.5,
+    "allow_postponement": false,
+    "pain_points": [
+      {
+        "id": "fuel_consumption",
+        "text": "Our current fleet consumes more fuel than planned. What evidence supports your proposed improvement?",
+        "reveal_topics": [
+          "fuel",
+          "consumption"
+        ],
+        "allow_generic": true,
+        "minimum_trust": 0.0
+      },
+      {
+        "id": "service_delay",
+        "text": "Service delays have extended downtime. How would your support plan address this?",
+        "reveal_topics": [
+          "maintenance",
+          "service",
+          "downtime"
+        ],
+        "allow_generic": false,
+        "minimum_trust": 0.55
+      },
+      {
+        "id": "budget",
+        "text": "We have a constrained replacement budget. Please explain the payback assumptions.",
+        "reveal_topics": [
+          "budget",
+          "cost",
+          "payback"
+        ],
+        "allow_generic": false,
+        "minimum_trust": 0.5
+      }
+    ]
+  },
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "id": "generated-demo",
+      "license": "Apache-2.0",
+      "permitted": true
+    }
+  ],
+  "manifest": {
+    "format_version": 1,
+    "data_classification": "generated_demo_not_customer_validation"
+  }
+}

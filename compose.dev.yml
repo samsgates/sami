@@ -1,0 +1,35 @@
+# Opt-in generated examples only. Do not mix with a customer production database.
+services:
+  demo-init:
+    image: sami-api:local
+    command: [init, --seed-demo]
+    environment:
+      SAMI_DATABASE_URL: postgres://sami:${SAMI_POSTGRES_PASSWORD}@database:5432/sami
+      SAMI_ENCRYPTION_KEY: ${SAMI_ENCRYPTION_KEY}
+      SAMI_SIGNING_KEY: ${SAMI_SIGNING_KEY}
+      SAMI_BOOTSTRAP_KEY: ${SAMI_BOOTSTRAP_KEY}
+      SAMI_ENV: development
+      SAMI_DATA_DIR: /var/lib/sami
+    depends_on:
+      database: {condition: service_healthy}
+    networks: [backend]
+    volumes: [sami-data:/var/lib/sami]
+    restart: 'no'
+  api:
+    environment: {SAMI_ENV: development}
+    depends_on:
+      demo-init: {condition: service_completed_successfully}
+  worker:
+    image: sami-api:local
+    command: [worker, --interval-seconds, '10']
+    environment:
+      SAMI_DATABASE_URL: postgres://sami:${SAMI_POSTGRES_PASSWORD}@database:5432/sami
+      SAMI_ENCRYPTION_KEY: ${SAMI_ENCRYPTION_KEY}
+      SAMI_SIGNING_KEY: ${SAMI_SIGNING_KEY}
+      SAMI_WORKER_KEY: ${SAMI_BOOTSTRAP_KEY}
+      SAMI_ENV: development
+      SAMI_DATA_DIR: /var/lib/sami
+    depends_on: {api: {condition: service_healthy}}
+    networks: [backend, frontend]
+    volumes: [sami-data:/var/lib/sami]
+    restart: unless-stopped

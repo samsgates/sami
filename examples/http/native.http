@@ -1,0 +1,24 @@
+# Set token privately using your HTTP client's environment support.
+@origin = http://127.0.0.1:8080
+@token = {{$processEnv SAMI_API_KEY}}
+### Supported native decision
+POST {{origin}}/v1/decisions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"task_id":"service_triage","input":{"message":"Serial 1600 is overheating","asset_id":"asset:unit_84","as_of":"2026-10-02"},"pack_id":"industrial-service"}
+### Scoped search
+POST {{origin}}/v1/knowledge/search
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"query":"overheating PX320","purpose":"service_prequalification","limit":10}
+### Research: inference never grants effect permission
+POST {{origin}}/v1/research/dsl.execute
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"program":{"op":"compare","operator":"le","left":{"op":"field","path":"hours"},"right":{"op":"literal","value":2000}},"data":{"hours":800}}
+### Audit (next page uses the last returned epoch)
+GET {{origin}}/v1/audit?after=0&limit=100
+Authorization: Bearer {{token}}
